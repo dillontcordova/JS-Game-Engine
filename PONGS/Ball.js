@@ -10,7 +10,7 @@ function Ball(_x, _y, _width, _height, _acceleration) {
 	};
 	this.tickActor = function(_actor) {
 		this.physics();
-		this.collision();
+		this.collision(_actor);
 	};
 
 	this.physics = function() {
@@ -19,17 +19,14 @@ function Ball(_x, _y, _width, _height, _acceleration) {
 		var velX = this.getVelX();
 		var velY = this.getVelY();
 		var accel = this.getAcceleration();
+
 		this.setX(x + velX);
 		this.setY(y + velY);
 
 	};
-	this.collision = function() {
-		var curBoundBox = this.getBoundBox();
-		var otherBoundBox = _actor.getBoundBox();
-		var strHitDirection = curBoundBox.checkCollision ( otherBoundBox );
-		if( !!strHitDirection ) {
-			var asd = curBoundBox.getBoundPoint( strHitDirection );
-		}
-		this.getBoundBox();
+	this.collision = function(_actor) {
+		var curCollision = this.getCollision();
+		var otherBoundBox = _actor.getCollision().getBoundBox();
+		curCollision.checkCollision ( otherBoundBox );
 	}
 }

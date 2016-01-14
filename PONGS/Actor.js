@@ -1,28 +1,14 @@
-//Abstract
 function Actor(_x, _y, _width, _height, _acceleration) {
 	Polymorphism.abstractClass(this, arguments);
 
-	var x;
-	var y;
-	var VelX;
-	var VelY;
-	var width;
-	var height;
-	var boundBox;
-	var acceleration;
-
-	(function() {
-		x = _x;
-		y = _y;
-		VelX = 0;
-		VelY = 0;
-		width = _width;
-		height = _height;
-		acceleration = _acceleration;
-		boundBox = new BoundBox(this);
-		// collision = new Collision(this); //TODO: add this as a class instead later to gain more information on the collision
-	})();
-
+	var x = _x;
+	var y = _y;
+	var velX = 0;
+	var velY = 0;
+	var width = _width;
+	var height = _height;
+	var acceleration = _acceleration;
+	var collision = new Collision(x, y, width, height);
 
 	this.tick = function(_canvasHeight, _canvasWidth, _input, _actors) {
 		for (var i = _actors.length - 1; i >= 0; i--) {
@@ -34,13 +20,8 @@ function Actor(_x, _y, _width, _height, _acceleration) {
 		this.drawActor(_ctx);
 	};
 
-	this.collision = function(_actor) {
-		var curBoundBox = this.getBoundBox();
-		var otherBoundBox = _actor.getBoundBox();
-		var strHitDirection = curBoundBox.checkCollision ( otherBoundBox );
-		if( !!strHitDirection ) {
-			var asd = curBoundBox.getBoundPoint( strHitDirection );
-		}
+	this.collision = function(/*_actor*/) {
+		Polymorphism.abstractMethod(this);
 	};
 	
 	this.getX = function() {
@@ -55,19 +36,19 @@ function Actor(_x, _y, _width, _height, _acceleration) {
     this.getVelY = function() {
 		return velY;
     };
-    this.getAcceleration = function() {
-		return acceleration;
-    };
     this.getWidth = function() {
 		return width;
     };
     this.getHeight = function() {
 		return height;
     };
-    this.getBoundBox = function() {
-		return boundBox;
+    this.getCollision = function() {
+		return collision;
     };
-    this.getFillStyle = function() {
+	this.getAcceleration = function() {
+		return acceleration;
+	};
+	this.getFillStyle = function() {
 		Polymorphism.abstractMethod(this);
 	};
 	this.drawActor = function(/*_ctx*/) {

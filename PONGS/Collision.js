@@ -1,13 +1,10 @@
-function Collision(_actor) {
-	Assert.is( _actor instanceof Actor, 'Can not obtain bound box when object is not an instanceof: "Actor"!');
-
+function Collision(_x, _y, _width, _height) {
 	var boundBox;
 	var curHitBound;
 	var curHitDirection;
-	(function() {
-		curHitDirection = '';
-		boundBox = new BoundBox(_actor);
-	})();
+
+	curHitDirection = '';
+	boundBox = new BoundBox(_x, _y, _width, _height);
 
 	this.checkCollision = function(_otherBox) {
 		Assert.is( _otherBox instanceof BoundBox, 'Can not obtain bound box when object is not an instanceof: "BoundBox"!');
@@ -41,7 +38,7 @@ function Collision(_actor) {
 		var hitStr = verticalHitDirection + horizontalHitDirection;
 
 		curHitDirection = hitStr;
-		curHitBound = boundBox.getBoundPoint([hitStr]);
+		curHitBound = boundBox.getBoundPoint(hitStr);
 	};
 
 	this.getBoundBox = function() {

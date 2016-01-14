@@ -1,4 +1,7 @@
 (function Main() {
+	Assert.setDebugModeTo(true);
+	Assert.setDevelopModeTo(true);
+
     var game = new Game();    
 	var canvasHeight = game.getCanvasHeight();
 	var canvasWidth = game.getCanvasWidth();
