@@ -1,3 +1,6 @@
+/**
+ * Created by dillon_cordova on 1/3/2016.
+ */
 (function Main() {
 	Assert.setDebugModeTo(true);
 	Assert.setDevelopModeTo(true);
@@ -9,7 +12,7 @@
 	var actors = [];
     actors.push( new LeftPaddle(0, canvasHeight/2, 15, 45, 5) );
     actors.push( new RightPaddle(canvasWidth-20, canvasHeight/2, 15, 45, 5) );
-    actors.push( new Ball(canvasWidth/2, canvasHeight/2, 10, 10, 5) );
+    actors.push( new Ball(canvasWidth/2, canvasHeight/2+10, 10, 10, 5) );
 
 	var input = new KeyInput();
 	var controller = new ActorController(game.getCanvasCtx(), canvasHeight, canvasWidth, input);

@@ -1,3 +1,6 @@
+/**
+ * Created by dillon_cordova on 1/4/2016.
+ */
 function ActorController(_ctx, _canvasHeight, _canvasWidth, _input) {
 	var ctx = _ctx;
 	var actors = [];

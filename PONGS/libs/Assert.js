@@ -1,6 +1,10 @@
+/**
+ * Created by dillon_cordova on 1/4/2016.
+ */
 var Assert = (function() {
 	var isDevelopModeOn = false;
 	var isDebugModeOn = true;
+
 	return {
 		is: function(_condition, _message) {
 			if(isDebugModeOn && !_condition) {

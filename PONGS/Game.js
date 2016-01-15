@@ -1,3 +1,6 @@
+/**
+ * Created by dillon_cordova on 1/3/2016.
+ */
 function Game() {
 //private:
 	var canvas = document.getElementById("game");
