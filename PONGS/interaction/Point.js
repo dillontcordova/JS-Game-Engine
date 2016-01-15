@@ -9,6 +9,12 @@ function Point(_coordinates) {
 	var y = _coordinates[1];
 	var z = _coordinates[2];
 
+	this.updatePoint = function(_newCoordinates) {
+		Assert.is(_coordinates instanceof Array, 'Point must be defined by an array object!');
+		x = _newCoordinates[0];
+		y = _newCoordinates[1];
+		z = _newCoordinates[2];
+	};
 	this.getX = function() {
 		return x;
 	};

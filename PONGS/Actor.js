@@ -15,7 +15,7 @@ function Actor(_x, _y, _width, _height, _acceleration) {
 
 	this.tick = function (_canvasHeight, _canvasWidth, _input, _actors) {
 		for (var i = _actors.length - 1; i >= 0; i--) {
-			if (this !== _actors[i]){
+			if (this !== _actors[i]) {
 				this.tickActor(_actors[i]);
 			}
 		}
@@ -66,9 +66,11 @@ function Actor(_x, _y, _width, _height, _acceleration) {
 
 	this.setX = function (__x) {
 		x = __x;
+		collision.updateBounds(__x, y);
 	};
 	this.setY = function (__y) {
 		y = __y;
+		collision.updateBounds(x, __y);
 	};
 	this.setVelX = function (_velX) {
 		velX = _velX;

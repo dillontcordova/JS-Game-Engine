@@ -20,7 +20,6 @@ function Ball(_x, _y, _width, _height, _acceleration) {
 		var curCollision = this.getCollision();
 		var curHitBound = curCollision.getCurHitBound();
 		var curHitDirection = curCollision.getCurHitDirection();
-		debugger;
 		if(curHitDirection == CollisionEnum.LEFT || curHitDirection == CollisionEnum.TOP_LEFT || curHitDirection == CollisionEnum.BOTTOM_LEFT) {
 			this.setVelX(-this.getVelX());
 		}
@@ -30,14 +29,14 @@ function Ball(_x, _y, _width, _height, _acceleration) {
 		var velX = 1;
 		var velY = this.getVelY();
 		var accel = this.getAcceleration();
-		//debugger;
+
 		this.setX(this.getX() + velX);
 		this.setY(this.getY() + velY);
 
 	};
 	this.collision = function(_actor) {
 		var curCollision = this.getCollision();
-		var otherBoundBox = _actor.getCollision().getBoundBox();
-		curCollision.checkCollision ( otherBoundBox );
+		var otherCollision = _actor.getCollision();
+		curCollision.checkCollision ( otherCollision );
 	}
 }
