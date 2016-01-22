@@ -20,10 +20,10 @@ function Ball(_x, _y, _width, _height, _acceleration) {
 		var curCollision = this.getCollision();
 		//var curHitBound = curCollision.getCurHitBound();
 		var curHitDirection = curCollision.getCurHitDirection();
-		if( (curHitDirection & CollisionEnum.LEFT) || (curHitDirection & CollisionEnum.TOP_LEFT) || (curHitDirection & CollisionEnum.BOTTOM_LEFT) ){
+		if( (curHitDirection & CollisionEnum.LEFT) == 0 /*|| (curHitDirection & CollisionEnum.TOP_LEFT) == 0 || (curHitDirection & CollisionEnum.BOTTOM_LEFT) == 0*/ ){
 			this.setVelX(-this.getVelX());
 		}
-		if( (curHitDirection & CollisionEnum.RIGHT) || (curHitDirection & CollisionEnum.TOP_RIGHT) || (curHitDirection & CollisionEnum.BOTTOM_RIGHT) ) {
+		if( (curHitDirection & CollisionEnum.RIGHT) == 0/* || (curHitDirection & CollisionEnum.TOP_RIGHT) == 0 || (curHitDirection & CollisionEnum.BOTTOM_RIGHT) == 0*/ ) {
 			this.setVelX(-this.getVelX());
 		}
 		var velX = 1;
