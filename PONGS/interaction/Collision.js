@@ -5,7 +5,7 @@ function Collision(_x, _y, _width, _height) {
 	var curHitBound;
 	var width = _width;
 	var height = _height;
-	var curHitDirection = '';
+	var curHitDirection = 0;
 	var boundBox = {
 		top: _y,
 		left: _x,
@@ -18,27 +18,44 @@ function Collision(_x, _y, _width, _height) {
 	};
 
 	this.checkCollision = function(_otherCollision) {
-		Assert.is( _otherCollision instanceof Collision, 'Can not obtain bound box when object is not an instanceof: "BoundBox"!');
+		Assert.is( _otherCollision instanceof Collision, 'Can not obtain bound box when object is not an instanceof: "Collision"!');
 
-		var hitStr = '';
-		var curBoundPoints = boundBox;
-		var otherBoundPoints = _otherCollision.getBoundBox();
+		var verticalAlign = false;
+		var horizontalAlign = false;
+		var otherBoundBox = _otherCollision.getBoundBox();
 
-		if( curBoundPoints.top <= otherBoundPoints.bottom) {
-			hitStr = CollisionEnum.TOP;
+		if( boundBox.top <= otherBoundBox.bottom && boundBox.top >= otherBoundBox.top ) {
+			curHitDirection |= CollisionEnum.TOP;
+			verticalAlign = true;
 		}
-		if( curBoundPoints.bottom >= otherBoundPoints.top ) {
-			hitStr = CollisionEnum.BOTTOM;
+		if( boundBox.bottom >= otherBoundBox.top && boundBox.bottom <= otherBoundBox.bottom ) {
+			curHitDirection |= CollisionEnum.BOTTOM;
+			verticalAlign = true;
+		}
+		if( boundBox.left <= otherBoundBox.right && boundBox.left >= otherBoundBox.left ) {
+			curHitDirection |= CollisionEnum.LEFT;
+			horizontalAlign = true;
+		}
+		if( boundBox.right >= otherBoundBox.left && boundBox.right <= otherBoundBox.right ) {
+			curHitDirection |= CollisionEnum.RIGHT;
+			horizontalAlign = true;
 		}
 
-		if( curBoundPoints.left <= otherBoundPoints.right ) {
-			hitStr += CollisionEnum.LEFT;
+		if(verticalAlign && horizontalAlign) {
+			// A collision took place
+			//if( (curHitDirection & CollisionEnum.RIGHT) != 0 ) {
+			//}
+			//if( (curHitDirection & CollisionEnum.LEFT) != 0 ) {
+			//}
+			//if( (curHitDirection & CollisionEnum.TOP) != 0 ) {
+			//}
+			//if( (curHitDirection & CollisionEnum.BOTTOM) != 0 ) {
+			//}
+			//
+			//if( (curHitDirection & (CollisionEnum.LEFT | CollisionEnum.BOTTOM)) != 0 ) {
+			//}
+			//curHitBound = boundBox[''];
 		}
-		if( curBoundPoints.right >= otherBoundPoints.left ) {
-			hitStr += CollisionEnum.RIGHT;
-		}
-		curHitDirection = hitStr;
-		curHitBound = boundBox[hitStr];
 	};
 
 	this.updateBounds = function(_x, _y) {

@@ -6,7 +6,7 @@ function Actor(_x, _y, _width, _height, _acceleration) {
 
 	var x = _x;
 	var y = _y;
-	var velX = 1;
+	var velX = 2;
 	var velY = 0;
 	var width = _width;
 	var height = _height;
