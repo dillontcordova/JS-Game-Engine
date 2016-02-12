@@ -4,14 +4,13 @@
 function Actor(_x, _y, _width, _height, _acceleration) {
 	Polymorphism.abstractClass(this, arguments);
 
-	var x = _x;
-	var y = _y;
 	var velX = 2;
 	var velY = 0;
 	var width = _width;
 	var height = _height;
-	var acceleration = _acceleration;
-	var collision = new Collision(x, y, width, height);
+	var xy = new Point( _x, _y);
+	//var acceleration = _acceleration;
+	var collision = new Collision(xy, width, height);
 
 	this.tick = function (_canvasHeight, _canvasWidth, _input, _actors) {
 		for (var i = _actors.length - 1; i >= 0; i--) {
@@ -30,10 +29,10 @@ function Actor(_x, _y, _width, _height, _acceleration) {
 	};
 
 	this.getX = function () {
-		return x;
+		return xy.getX();
 	};
 	this.getY = function () {
-		return y;
+		return xy.getY();
 	};
 	this.getVelX = function () {
 		return velX;
@@ -50,9 +49,9 @@ function Actor(_x, _y, _width, _height, _acceleration) {
 	this.getCollision = function () {
 		return collision;
 	};
-	this.getAcceleration = function () {
-		return acceleration;
-	};
+	//this.getAcceleration = function () {
+	//	return acceleration;
+	//};
 	this.getFillStyle = function () {
 		Polymorphism.abstractMethod(this);
 	};
@@ -65,12 +64,10 @@ function Actor(_x, _y, _width, _height, _acceleration) {
 
 
 	this.setX = function (__x) {
-		x = __x;
-		collision.updateBounds(__x, y);
+		xy.setX(__x);
 	};
 	this.setY = function (__y) {
-		y = __y;
-		collision.updateBounds(x, __y);
+		xy.setY(__y);
 	};
 	this.setVelX = function (_velX) {
 		velX = _velX;
@@ -78,7 +75,7 @@ function Actor(_x, _y, _width, _height, _acceleration) {
 	this.setVelY = function (_velY) {
 		velY = _velY;
 	};
-	this.setacceleration = function (__acceleration) {
-		acceleration = __acceleration;
-	};
+	//this.setAcceleration = function (__acceleration) {
+	//	acceleration = __acceleration;
+	//};
 }

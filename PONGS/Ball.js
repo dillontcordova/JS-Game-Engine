@@ -18,20 +18,20 @@ function Ball(_x, _y, _width, _height, _acceleration) {
 
 	this.physics = function() {
 		var curCollision = this.getCollision();
-		//var curHitBound = curCollision.getCurHitBound();
 		var curHitDirection = curCollision.getCurHitDirection();
-		if( (curHitDirection & CollisionEnum.LEFT) == 0 /*|| (curHitDirection & CollisionEnum.TOP_LEFT) == 0 || (curHitDirection & CollisionEnum.BOTTOM_LEFT) == 0*/ ){
-			this.setVelX(-this.getVelX());
-		}
-		if( (curHitDirection & CollisionEnum.RIGHT) == 0/* || (curHitDirection & CollisionEnum.TOP_RIGHT) == 0 || (curHitDirection & CollisionEnum.BOTTOM_RIGHT) == 0*/ ) {
-			this.setVelX(-this.getVelX());
-		}
-		var velX = 1;
-		var velY = this.getVelY();
-		var accel = this.getAcceleration();
+		//var velY = this.getVelY();
 
-		this.setX(this.getX() + velX);
-		this.setY(this.getY() + velY);
+		if( curCollision.getIsColliding() ){
+			if( (curHitDirection & CollisionEnum.LEFT) != 0) {
+				this.setVelX(-this.getVelX());
+			}
+			if( (curHitDirection & CollisionEnum.RIGHT) != 0 ) {
+				this.setVelX(-this.getVelX());
+			}
+		}
+
+		this.setX(this.getX() + this.getVelX());
+		//this.setY(this.getY());
 
 	};
 	this.collision = function(_actor) {
