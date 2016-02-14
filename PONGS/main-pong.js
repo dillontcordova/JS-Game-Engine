@@ -10,9 +10,10 @@
 	var canvasWidth = game.getCanvasWidth();
 
 	var actors = [];
-    actors.push( new LeftPaddle(0, canvasHeight/2, 15, 45, 5) );
-    actors.push( new RightPaddle(canvasWidth-20, canvasHeight/2, 15, 45, 5) );
-    actors.push( new Ball(canvasWidth/2, canvasHeight/2+10, 10, 10, 5) );
+	//actors.push( new Room(0, 0, canvasWidth, canvasHeight, 0) );
+	actors.push( new LeftPaddle(0, canvasHeight/2, 15, 45, 5) );
+	actors.push( new RightPaddle(canvasWidth-20, canvasHeight/2, 15, 45, 5) );
+	actors.push( new Ball(canvasWidth/2, canvasHeight/2+10, 10, 10, 5) );
 
 	var input = new KeyInput();
 	var controller = new ActorController(game.getCanvasCtx(), canvasHeight, canvasWidth, input);

@@ -15,7 +15,7 @@ function Actor(_x, _y, _width, _height, _acceleration) {
 	this.tick = function (_canvasHeight, _canvasWidth, _input, _actors) {
 		for (var i = _actors.length - 1; i >= 0; i--) {
 			if (this !== _actors[i]) {
-				this.tickActor(_actors[i]);
+				this.tickActor(_actors[i].getCollision());
 			}
 		}
 	};

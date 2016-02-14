@@ -1,12 +1,13 @@
 /**
  * Created by dillon_cordova on 1/4/2016.
  */
-function Collision(_xyPoint, _width, _height) {
+function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
 	var isColliding;
 	var width = _width;
 	var height = _height;
 	var xyPoint = _xyPoint;
 	var curHitDirection = 0;
+	var usingPixelPerfect = _usingPixelPerfect || false;
 
 	this.getBoundBox = function() {
 		return {
@@ -45,12 +46,26 @@ function Collision(_xyPoint, _width, _height) {
 		}
 
 		if(verticalAlign && horizontalAlign) {
-			// A collision took place
 			isColliding = true;
+			if( usingPixelPerfect ) {
+				//TODO: pixel perfect logic here
+			}
 		}
 	};
 
-	this.getIsColliding = function() {
+	this.isCollidingLeft = function() {
+		return (curHitDirection & CollisionEnum.LEFT) != 0
+	};
+	this.isCollidingRight = function() {
+		return (curHitDirection & CollisionEnum.RIGHT) != 0
+	};
+	this.isCollidingTop = function() {
+		return (curHitDirection & CollisionEnum.TOP) != 0
+	};
+	this.isCollidingBottom = function() {
+		return (curHitDirection & CollisionEnum.BOTTOM) != 0
+	};
+	this.isColliding = function() {
 		return isColliding;
 	};
 	this.getCurHitDirection = function() {
