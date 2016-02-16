@@ -29,27 +29,40 @@ function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
 		var otherBoundBox = _otherCollision.getBoundBox();
 
 		if( boundBox.top <= otherBoundBox.bottom && boundBox.top >= otherBoundBox.top ) {
-			curHitDirection |= CollisionEnum.TOP;
 			verticalAlign = true;
+			if( boundBox.bottom >= otherBoundBox.bottom) {
+				curHitDirection |= CollisionEnum.TOP;
+			}
 		}
 		if( boundBox.bottom >= otherBoundBox.top && boundBox.bottom <= otherBoundBox.bottom ) {
-			curHitDirection |= CollisionEnum.BOTTOM;
 			verticalAlign = true;
+			if( boundBox.top <= otherBoundBox.top) {
+				curHitDirection |= CollisionEnum.BOTTOM;
+			}
 		}
 		if( boundBox.left <= otherBoundBox.right && boundBox.left >= otherBoundBox.left ) {
-			curHitDirection |= CollisionEnum.LEFT;
 			horizontalAlign = true;
+			if( boundBox.right >= otherBoundBox.right) {
+				curHitDirection |= CollisionEnum.LEFT;
+			}
 		}
 		if( boundBox.right >= otherBoundBox.left && boundBox.right <= otherBoundBox.right ) {
-			curHitDirection |= CollisionEnum.RIGHT;
 			horizontalAlign = true;
+			if( boundBox.left <= otherBoundBox.left) {
+				curHitDirection |= CollisionEnum.RIGHT;
+			}
 		}
 
 		if(verticalAlign && horizontalAlign) {
-			isColliding = true;
-			if( usingPixelPerfect ) {
-				//TODO: pixel perfect logic here
+			if((curHitDirection & CollisionEnum.ALL_SIDES) == CollisionEnum.ALL_SIDES) {
+				//TODO: inside
+			} else {
+				if( usingPixelPerfect ) {
+					//TODO: pixel perfect logic here
+				}
 			}
+			isColliding = true;
+
 		}
 	};
 

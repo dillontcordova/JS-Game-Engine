@@ -10,15 +10,17 @@ var CollisionEnum = (function() {
 	var topRight = top | right;
 	var bottomLeft = bottom | left;
 	var bottomRight = bottom | right;
+	var allSides = bottom | right | left | top;
 
 	return {
-		TOP: top,
-		LEFT: left,
-		RIGHT: right,
-		BOTTOM: bottom,
-		TOP_LEFT: topLeft,
-		TOP_RIGHT: topRight,
-		BOTTOM_LEFT: bottomLeft,
-		BOTTOM_RIGHT: bottomRight
+		TOP:			top,
+		LEFT:			left,
+		RIGHT:			right,
+		BOTTOM:			bottom,
+		TOP_LEFT:		topLeft,
+		ALL_SIDES:		allSides,
+		TOP_RIGHT:		topRight,
+		BOTTOM_LEFT:	bottomLeft,
+		BOTTOM_RIGHT:	bottomRight
 	};
 })();
