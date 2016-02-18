@@ -19,7 +19,7 @@ function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
 	};
 
 	this.checkCollision = function(_otherCollision) {
-		Assert.is( _otherCollision instanceof Collision, 'Can not obtain bound box when object is not an instanceof: "Collision"!');
+		Assert.is( _otherCollision instanceof Collision, 'Can not obtain bound box when object is not an instanceof: "' + Collision.name + '"!');
 
 		isColliding = false;
 		curHitDirection = 0;
