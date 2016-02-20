@@ -7,12 +7,13 @@ function Point(/*argumentsCoordinates*/) {
 	var x = 0;
 	var y = 0;
 	var z = 0;
+	var isLocked = false;
 	setCoordinates(arguments);
 
 	function setCoordinates(_coordinates) {
-		var errorMsg = 'Argument number: "' + i + '"  when creating this point is not a number!';
 		for(var i = 0, len = _coordinates.length; i < len; i++) {
 			var coordinate =  _coordinates[i];
+			var errorMsg = 'Argument number: "' + i + '"  when creating this point is not a number!';
 			if(i != len-1) {
 				Assert.is(typeof coordinate == 'number', errorMsg);
 			} else {
@@ -25,9 +26,23 @@ function Point(/*argumentsCoordinates*/) {
 	}
 
 	this.updatePoint = function(/*argumentsCoordinates*/) {
-		Assert.is(arguments.length > 1 && arguments.length < 4, 'Point can only be defined by 2 or 3 coordinate values!');
-		setCoordinates(arguments);
+		if( !this.isPointLocked() ) {
+			Assert.is(arguments.length > 1 && arguments.length < 4, 'Point can only be defined by 2 or 3 coordinate values!');
+			setCoordinates(arguments);
+		}
 	};
+
+	this.isPointLocked = function () {
+		Assert.console('The Point: "' + this + '" is Locked and can not be altered until unlocked.', isLocked);
+		return isLocked;
+	};
+	this.lockPoint = function() {
+		isLocked = true;
+	};
+	this.unlockPoint = function() {
+		isLocked = false;
+	};
+
 	this.getX = function() {
 		return x;
 	};
@@ -38,12 +53,18 @@ function Point(/*argumentsCoordinates*/) {
 		return z;
 	};
 	this.setX = function(_x) {
-		x = _x;
+		if( !this.isPointLocked() ) {
+			x = _x;
+		}
 	};
 	this.setY = function(_y) {
-		y = _y;
+		if( !this.isPointLocked() ) {
+			y = _y;
+		}
 	};
 	this.setZ = function(_z) {
-		z = _z;
+		if( !this.isPointLocked() ) {
+			z = _z;
+		}
 	};
 }

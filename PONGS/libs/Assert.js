@@ -11,8 +11,8 @@ var Assert = (function() {
 				throw new Error(_message);
 			}
 		},
-		console: function(_message) {
-			if(isDevelopModeOn) {
+		console: function(_message, _condition) {
+			if(isDevelopModeOn && (_condition || _condition === undefined)) {
 				console.log(_message);
 			}
 		},
