@@ -9,7 +9,6 @@ function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
 	var otherBoundBox = {};
 	var curHitDirection = 0;
 	var usingPixelPerfect = _usingPixelPerfect || false;
-	var xyPointClone = new Point(_xyPoint.getX(), _xyPoint.getY());
 
 	this.getBoundBox = function() {
 		return {
@@ -25,13 +24,8 @@ function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
 
 		isColliding = false;
 		curHitDirection = 0;
-		var verticalAlign = false;
-		var horizontalAlign = false;
 		var boundBox = this.getBoundBox();
 		otherBoundBox = _otherCollision.getBoundBox();
-
-		xyPointClone.setX(xyPoint.getX());
-		xyPointClone.setY(xyPoint.getY());
 
 		if( boundBox.top <= otherBoundBox.bottom &&
 			boundBox.bottom >= otherBoundBox.top &&
@@ -40,63 +34,34 @@ function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
 		){
 			if( boundBox.bottom >= otherBoundBox.bottom && boundBox.top >= otherBoundBox.top ) {
 				curHitDirection |= CollisionEnum.TOP;
-				debugger;
+				xyPoint.setY(otherBoundBox.bottom);
+				xyPoint.lockPoint();
+				isColliding = true;
+				//debugger;
 			}
 			if( boundBox.top <= otherBoundBox.top && boundBox.bottom <= otherBoundBox.bottom ) {
 				curHitDirection |= CollisionEnum.BOTTOM;
-				debugger;
+				xyPoint.setY(otherBoundBox.top - height);
+				xyPoint.lockPoint();
+				isColliding = true;
+				//debugger;
 			}
 			if( boundBox.right >= otherBoundBox.right && boundBox.left >= otherBoundBox.left ) {
 				curHitDirection |= CollisionEnum.LEFT;
-				debugger;
+				xyPoint.setX(otherBoundBox.right);
+				xyPoint.lockPoint();
+				isColliding = true;
+				//debugger;
 			}
 			if( boundBox.left <= otherBoundBox.left && boundBox.right <= otherBoundBox.right) {
 				curHitDirection |= CollisionEnum.RIGHT;
-				debugger;
+				xyPoint.setX(otherBoundBox.left - width);
+				xyPoint.lockPoint();
+				isColliding = true;
+				//debugger;
 			}
 		}
-
-		if( boundBox.top <= otherBoundBox.bottom && boundBox.top >= otherBoundBox.top ) {
-			verticalAlign = true;
-			if( boundBox.bottom >= otherBoundBox.bottom) {
-				curHitDirection |= CollisionEnum.TOP;
-				xyPointClone.setY(otherBoundBox.bottom);
-				xyPointClone.lockPoint();
-			}
-		}
-		if( boundBox.bottom >= otherBoundBox.top && boundBox.bottom <= otherBoundBox.bottom ) {
-			verticalAlign = true;
-			if( boundBox.top <= otherBoundBox.top) {
-				curHitDirection |= CollisionEnum.BOTTOM;
-				xyPointClone.setY(otherBoundBox.top - height);
-				xyPointClone.lockPoint();
-			}
-		}
-		if( boundBox.left <= otherBoundBox.right && boundBox.left >= otherBoundBox.left ) {
-			horizontalAlign = true;
-			if( boundBox.right >= otherBoundBox.right) {
-				curHitDirection |= CollisionEnum.LEFT;
-				xyPointClone.setX(otherBoundBox.right);
-				xyPointClone.lockPoint();
-			}
-		}
-		if( boundBox.right >= otherBoundBox.left && boundBox.right <= otherBoundBox.right ) {
-			horizontalAlign = true;
-			if( boundBox.left <= otherBoundBox.left) {
-				curHitDirection |= CollisionEnum.RIGHT;
-				xyPointClone.setX(otherBoundBox.left - width);
-				xyPointClone.lockPoint();
-			}
-		}
-
-		if(verticalAlign && horizontalAlign) {
-			xyPoint.setX(xyPointClone.getX());
-			xyPoint.setY(xyPointClone.getY());
-			isColliding = true;
-		} else {
-			curHitDirection = 0;
-		}
-		xyPointClone.unlockPoint();
+		xyPoint.unlockPoint();
 	};
 
 	this.isCollidingLeft = function() {
