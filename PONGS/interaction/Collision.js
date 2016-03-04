@@ -33,6 +33,29 @@ function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
 		xyPointClone.setX(xyPoint.getX());
 		xyPointClone.setY(xyPoint.getY());
 
+		if( boundBox.top <= otherBoundBox.bottom &&
+			boundBox.bottom >= otherBoundBox.top &&
+			boundBox.right >= otherBoundBox.left &&
+			boundBox.left <= otherBoundBox.right
+		){
+			if( boundBox.bottom >= otherBoundBox.bottom && boundBox.top >= otherBoundBox.top ) {
+				curHitDirection |= CollisionEnum.TOP;
+				debugger;
+			}
+			if( boundBox.top <= otherBoundBox.top && boundBox.bottom <= otherBoundBox.bottom ) {
+				curHitDirection |= CollisionEnum.BOTTOM;
+				debugger;
+			}
+			if( boundBox.right >= otherBoundBox.right && boundBox.left >= otherBoundBox.left ) {
+				curHitDirection |= CollisionEnum.LEFT;
+				debugger;
+			}
+			if( boundBox.left <= otherBoundBox.left && boundBox.right <= otherBoundBox.right) {
+				curHitDirection |= CollisionEnum.RIGHT;
+				debugger;
+			}
+		}
+
 		if( boundBox.top <= otherBoundBox.bottom && boundBox.top >= otherBoundBox.top ) {
 			verticalAlign = true;
 			if( boundBox.bottom >= otherBoundBox.bottom) {
@@ -44,7 +67,6 @@ function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
 		if( boundBox.bottom >= otherBoundBox.top && boundBox.bottom <= otherBoundBox.bottom ) {
 			verticalAlign = true;
 			if( boundBox.top <= otherBoundBox.top) {
-				debugger;
 				curHitDirection |= CollisionEnum.BOTTOM;
 				xyPointClone.setY(otherBoundBox.top - height);
 				xyPointClone.lockPoint();
