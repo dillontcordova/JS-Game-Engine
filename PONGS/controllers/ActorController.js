@@ -1,9 +1,10 @@
 /**
  * Created by dillon_cordova on 1/4/2016.
  */
-function ActorController(_ctx, _canvasHeight, _canvasWidth, _input) {
+function ActorController(_ctx, _canvasHeight, _canvasWidth, _input, _room) {
 	var ctx = _ctx;
 	var actors = [];
+	var room = _room;
 	var input = _input;
 	var canvasWidth = _canvasWidth;
 	var canvasHeight = _canvasHeight;
@@ -11,6 +12,8 @@ function ActorController(_ctx, _canvasHeight, _canvasWidth, _input) {
 	this.addActors = function(__actors) {
 		for (var i = __actors.length - 1; i >= 0; i--) {
 			Assert.is( __actors[i] instanceof Actor, "Can only add actors to this controller!" );
+			debugger;
+			room.setSector(__actors[i]);
 			actors.push(__actors[i]);
 		}
 	};
@@ -24,7 +27,7 @@ function ActorController(_ctx, _canvasHeight, _canvasWidth, _input) {
 
 	this.tick = function() {
 		for (var i = actors.length - 1; i >= 0; i--) {
-			actors[i].tick(canvasHeight, canvasWidth, input, actors);
+			actors[i].tick(canvasHeight, canvasWidth, input, room);
 		}
 	};
 
