@@ -8,6 +8,7 @@ function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
 	var xyPoint = _xyPoint;
 	var otherBoundBox = {};
 	var curHitDirection = 0;
+	var isContainedWithin = false;
 	var usingPixelPerfect = _usingPixelPerfect || false;
 
 	this.getBoundBox = function() {
@@ -24,6 +25,7 @@ function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
 
 		isColliding = false;
 		curHitDirection = 0;
+		isContainedWithin = false;
 		var boundBox = this.getBoundBox();
 		otherBoundBox = _otherCollision.getBoundBox();
 
@@ -60,6 +62,9 @@ function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
 				isColliding = true;
 				//debugger;
 			}
+			if( curHitDirection === 0 ) {
+				isContainedWithin = true;
+			}
 		}
 		xyPoint.unlockPoint();
 	};
@@ -78,5 +83,8 @@ function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
 	};
 	this.isColliding = function() {
 		return isColliding;
+	};
+	this.isContainedWithin = function() {
+		return isContainedWithin;
 	};
 }

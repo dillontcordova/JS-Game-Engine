@@ -26,7 +26,7 @@ function Room(_width, _sectorSize) {
 			}
 		}
 //////////////////////////////////////////////////////////////////////
-		var aaa = new Sector(width, height);		
+		var aaa = new Sector(0, 0, width, height);
 		for(var k = 0; k < 4; k++) {
 			aaa.addSector();
 		}		
