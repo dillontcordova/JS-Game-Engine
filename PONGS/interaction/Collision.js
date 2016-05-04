@@ -13,6 +13,8 @@ function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
 
 	this.getBoundBox = function() {
 		return {
+			width: width,
+			height: height,
 			top: xyPoint.getY(),
 			left: xyPoint.getX(),
 			right: (xyPoint.getX() + width),

@@ -6,24 +6,28 @@ function Sector(_x, _y, _width, _height) {
 	var box				= new Collision(new Point(_x, _y), _width, _height).getBoundBox();
 
 	(function constructor(){
-		quadrants = addQuadrants(box.left, box.top, box.right / 2, box.bottom / 2);
+		quadrants = addQuadrants(box.left, box.top, (box.width) / 2, (box.width) / 2);
 	})();
 
 	function addQuadrants(_left, _top, _quadrantWidth, _quadrantHeight) {
 		return {
 			topLeft: {
+				actors: [],
 				subSector: null,
 				box: new Collision(new Point(_left, _top), _quadrantWidth, _quadrantHeight).getBoundBox()
 			},
 			botLeft: {
+				actors: [],
 				subSector: null,
 				box: new Collision(new Point(_left, _top + _quadrantHeight), _quadrantWidth, _quadrantHeight).getBoundBox()
 			},
 			topRight: {
+				actors: [],
 				subSector: null,
 				box: new Collision(new Point(_left + _quadrantWidth, _top), _quadrantWidth, _quadrantHeight).getBoundBox()
 			},
 			botRight: {
+				actors: [],
 				subSector: null,
 				box: new Collision(new Point(_left + _quadrantWidth, _top + _quadrantHeight), _quadrantWidth, _quadrantHeight).getBoundBox()
 			}
@@ -40,15 +44,16 @@ function Sector(_x, _y, _width, _height) {
 	};
 	this.addSubSectorLayer = function () {
 		for(var key in quadrants) {
-			var xThing = 0;
-			var yThing = 0;
-			var sub = quadrants[key];
-			if(sub.subSector){
-				sub.subSector.addSubSectorLayer();
+			var curQuadrant = quadrants[key];
+			var subSector = curQuadrant.subSector;
+			if(subSector) {
+				subSector.addSubSectorLayer();
 			} else {
-				var subBox = sub.box;
-				var height = subBox.bottom / 2;
-				var width = subBox.right / 2;
+				var xThing = 0;
+				var yThing = 0;
+				var curQuadrantBox = curQuadrant.box;
+				var height = curQuadrantBox.bottom / 2;
+				var width = curQuadrantBox.right / 2;
 
 				switch (key) {
 					case 'botLeft':
@@ -62,9 +67,39 @@ function Sector(_x, _y, _width, _height) {
 						xThing = width;
 						break;
 				}
-				sub.subSector = new Sector(subBox.left + xThing, subBox.top + yThing, width, height);
+				subSector = new Sector(curQuadrantBox.left + xThing, curQuadrantBox.top + yThing, width, height);
 			}
 		}
+	};
+
+	this.poop = function (_actorBox, quadrantBox) {
+		this.setCheckAreas = (_actorBox, _dfg);
+	};
+	this.isContainedWithin = function (_actorBox, _quadrantBox) {
+		var isBigger = _actorBox.width > _quadrantBox.width && _actorBox.height > _quadrantBox.height;
+		return	!isBigger							 &&
+				_actorBox.top <= _quadrantBox.bottom &&
+				_actorBox.bottom >= _quadrantBox.top &&
+				_actorBox.right >= _quadrantBox.left &&
+				_actorBox.left <= _quadrantBox.right;
+	};
+	this.setCheckAreas = function (_actorBox, _dfg) {
+		for(var key in quadrants) {
+			var curQuadrant = quadrants[key];
+			var curQuadrantBox = curQuadrant.box;
+			if( this.isContainedWithin(_actorBox, curQuadrantBox) ){
+				var subSector = curQuadrant.subSector;
+				if(subSector) {
+					subSector.setCheckAreas();
+				}
+				curQuadrant.actors.find(function(poop) {
+					return poop.poop == 6
+				});
+				_dfg = curQuadrant.actors.push();
+			}
+			//;
+		}
+		return quadrants;
 	};
 	this.getQuadrants = function () {
 		return quadrants;

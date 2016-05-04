@@ -6,6 +6,7 @@ function Room(_width, _sectorSize) {
 	Assert.is(_width % _sectorSize === 0, 'Not a proper resolution size for Width!');
 
 	var gridMap = [];
+	var overallGrid;
 	var width = _width;
 	var subGridLength = 3;
 	var height = width / 12 * 9;
@@ -16,7 +17,7 @@ function Room(_width, _sectorSize) {
 	}
 
 	(function () {
-		var overallGrid = new Sector(0, 0, width, height);
+		overallGrid = new Sector(0, 0, width, height);
 		debugger;
 		overallGrid.addSubSectorLayers(2);
 	})();
@@ -73,10 +74,11 @@ function Room(_width, _sectorSize) {
 
 	this.setSector = function(_actor) {
 		Assert.is( _actor instanceof Actor, '!');
-		var box = _actor.getCollision().getBoundBox();
+		var actorBox = _actor.getCollision().getBoundBox();
 
-		var sectorPositionA = this.roundToSector(box.left, box.top);
-		var sectorPositionB = this.roundToSector(box.right, box.bottom);
+		overallGrid.setCheckAreas(actorBox);
+		var sectorPositionA = this.roundToSector(actorBox.left, actorBox.top);
+		var sectorPositionB = this.roundToSector(actorBox.right, actorBox.bottom);
 
 		var asd = this.getSectorsBetween(sectorPositionA, sectorPositionB);
 		// gridMap[sectorPositionA.rowNum][sectorPositionA.columnNum].setActor(_actor);
