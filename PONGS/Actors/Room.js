@@ -6,7 +6,6 @@ function Room(_width, _sectorSize) {
 	Assert.is(_width % _sectorSize === 0, 'Not a proper resolution size for Width!');
 
 	var gridMap = [];
-	var gridThing = [];
 	var width = _width;
 	var subGridLength = 3;
 	var height = width / 12 * 9;
@@ -17,19 +16,9 @@ function Room(_width, _sectorSize) {
 	}
 
 	(function () {
-		var rowsCount = height / sectorSize;
-		var columnCount = width / sectorSize;
-		for(var i = 0; i < rowsCount; i++) {
-			gridMap.push([]);
-			for(var j = 0; j < columnCount; j++) {
-				gridMap[i].push( new Sector(i, j) );
-			}
-		}
-//////////////////////////////////////////////////////////////////////
-		var aaa = new Sector(0, 0, width, height);
-		for(var k = 0; k < 4; k++) {
-			aaa.addSector();
-		}		
+		var overallGrid = new Sector(0, 0, width, height);
+		debugger;
+		overallGrid.addSubSectorLayers(2);
 	})();
 
 	this.getSectorsBetween = function(_sectorElementsA, _sectorElementsB) {
@@ -51,18 +40,11 @@ function Room(_width, _sectorSize) {
 		return sectors;
 	};
 
-
-
 	this.roundToSector = function(x, y) {
-		
-		
-		
 		var rowNumber = Math.round(x / sectorSize);
 		var columnNumber = Math.round(y / sectorSize);
 		return gridMap[rowNumber][columnNumber];
 	};
-	
-	
 
 	this.roundToSector = function(x, y) {
 		var rowNumber = Math.round(x / sectorSize);
