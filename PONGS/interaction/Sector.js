@@ -6,7 +6,7 @@ function Sector(_x, _y, _width, _height) {
 	var box				= new Collision(new Point(_x, _y), _width, _height).getBoundBox();
 
 	(function constructor(){
-		quadrants = addQuadrants(box.left, box.top, (box.width) / 2, (box.width) / 2);
+		quadrants = addQuadrants(box.left, box.top, (box.width) / 2, (box.height) / 2);
 	})();
 
 	function addQuadrants(_left, _top, _quadrantWidth, _quadrantHeight) {
@@ -67,7 +67,7 @@ function Sector(_x, _y, _width, _height) {
 						xThing = width;
 						break;
 				}
-				subSector = new Sector(curQuadrantBox.left + xThing, curQuadrantBox.top + yThing, width, height);
+				curQuadrant.subSector = new Sector(curQuadrantBox.left + xThing, curQuadrantBox.top + yThing, width, height);
 			}
 		}
 	};
@@ -84,20 +84,21 @@ function Sector(_x, _y, _width, _height) {
 				_actorBox.left <= _quadrantBox.right;
 	};
 	this.setCheckAreas = function (_actorBox, _dfg) {
+		debugger;
 		for(var key in quadrants) {
 			var curQuadrant = quadrants[key];
 			var curQuadrantBox = curQuadrant.box;
 			if( this.isContainedWithin(_actorBox, curQuadrantBox) ){
 				var subSector = curQuadrant.subSector;
 				if(subSector) {
-					subSector.setCheckAreas();
+					subSector.setCheckAreas(_actorBox);
+				} else {
+					curQuadrant.actors.push(_actorBox);
 				}
-				curQuadrant.actors.find(function(poop) {
-					return poop.poop == 6
-				});
-				_dfg = curQuadrant.actors.push();
+				// curQuadrant.actors.find(function(poop) {
+				// 	return poop.poop == 6
+				// });
 			}
-			//;
 		}
 		return quadrants;
 	};

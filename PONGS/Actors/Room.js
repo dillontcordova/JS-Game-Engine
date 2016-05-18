@@ -9,7 +9,7 @@ function Room(_width, _sectorSize) {
 	var overallGrid;
 	var width = _width;
 	var subGridLength = 3;
-	var height = width / 12 * 9;
+	var height = 256;//width / 12 * 9;
 	var sectorSize = _sectorSize;
 
 	function isPowerOfTwo(int) {
@@ -18,7 +18,6 @@ function Room(_width, _sectorSize) {
 
 	(function () {
 		overallGrid = new Sector(0, 0, width, height);
-		debugger;
 		overallGrid.addSubSectorLayers(2);
 	})();
 

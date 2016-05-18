@@ -9,7 +9,7 @@
 	var controller		= null;
 	var game			= new Game();
 	var input			= new KeyInput();
-	var room			= new Room(1024, 32);
+	var room			= new Room(512, 32);
 	var canvasWidth		= game.getCanvasWidth();
 	var canvasHeight	= game.getCanvasHeight();
 

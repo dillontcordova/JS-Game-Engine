@@ -12,7 +12,6 @@ function ActorController(_ctx, _canvasHeight, _canvasWidth, _input, _room) {
 	this.addActors = function(__actors) {
 		for (var i = __actors.length - 1; i >= 0; i--) {
 			Assert.is( __actors[i] instanceof Actor, "Can only add actors to this controller!" );
-			debugger;
 			room.setSector(__actors[i]);
 			actors.push(__actors[i]);
 		}
