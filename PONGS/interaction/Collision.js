@@ -36,6 +36,7 @@ function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
 			boundBox.right >= otherBoundBox.left &&
 			boundBox.left <= otherBoundBox.right
 		){
+			debugger;
 			if( boundBox.bottom >= otherBoundBox.bottom && boundBox.top >= otherBoundBox.top ) {
 				curHitDirection |= CollisionEnum.TOP;
 				xyPoint.setY(otherBoundBox.bottom);

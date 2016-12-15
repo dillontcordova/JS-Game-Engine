@@ -6,6 +6,16 @@ function Paddle(_x, _y, _width, _height, _speed) {
     Polymorphism.abstractClass(this, arguments);
 	Actor.call(this, _x, _y, _width, _height, _speed);
 
+    this.physics = function() {
+    };
+
+    this.collision = function(_otherCollision) {
+    };
+
+    this.drawActor = function(_ctx) {
+        _ctx.fillRect( this.getX(), this.getY(), this.getWidth(), this.getHeight() );
+    };
+
 	this.tick = function(canvasHeight, canvasWidth, input) {
 		var y;
 		var x;

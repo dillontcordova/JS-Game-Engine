@@ -72,9 +72,6 @@ function Sector(_x, _y, _width, _height) {
 		}
 	};
 
-	this.poop = function (_actorBox, quadrantBox) {
-		this.setCheckAreas = (_actorBox, _dfg);
-	};
 	this.isContainedWithin = function (_actorBox, _quadrantBox) {
 		var isBigger = _actorBox.width > _quadrantBox.width && _actorBox.height > _quadrantBox.height;
 		return	!isBigger							 &&
