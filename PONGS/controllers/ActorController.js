@@ -18,13 +18,8 @@ function ActorController(_ctx, _canvasHeight, _canvasWidth, _input) {
 
 	this.tick = function() {
 		for (var i = actors.length - 1; i >= 0; --i) {
-			for(var j = actors.length - 1; j >= 0; --j) {
-				if(i != j) {
-					actors[i].collision(actors[j].getCollision());
-                    actors[i].physics(canvasHeight, canvasWidth, input);
-				}
-			}
-		}
+            actors[i].tick(actors, input);
+        }
 	};
 
 	// this.addViews = function(__actors) {

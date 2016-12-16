@@ -15,7 +15,16 @@ function Actor(_x, _y, _width, _height, _acceleration) {
 		_ctx.fillStyle = this.getFillStyle();
 		this.drawActor(_ctx);
 	};
-    
+
+	this.tick = function(_actors, _input) {
+        for(var i = _actors.length - 1; i >= 0; --i) {
+			var curOtherActor = _actors[i];
+            if(this != curOtherActor) {
+                this.collision(curOtherActor.getCollision());
+                this.physics();
+            }
+        }
+	};
 	this.collision = function(_otherCollision) {
 		Polymorphism.abstractMethod(this);
 	};

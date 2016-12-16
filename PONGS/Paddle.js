@@ -16,7 +16,7 @@ function Paddle(_x, _y, _width, _height, _speed) {
         _ctx.fillRect( this.getX(), this.getY(), this.getWidth(), this.getHeight() );
     };
 
-	this.tick = function(canvasHeight, canvasWidth, input) {
+	this.tick = function(_actors, input) {
 		var y;
 		var x;
 
