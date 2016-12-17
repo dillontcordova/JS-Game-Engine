@@ -30,7 +30,6 @@ function Ball(_x, _y, _width, _height, _acceleration) {
             }
 		}
 
-        debugger;
 		this.setX(this.getX() + this.getVelX());
 		this.setY(this.getY() + this.getVelY());
 	};

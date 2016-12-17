@@ -1,10 +1,9 @@
 /**
- * Created by dillon_cordova on 1/4/2016.
+ * Created by Dillon_Cordova on 1/4/2016.
  */
 function ActorController(_ctx, _canvasHeight, _canvasWidth, _input) {
 	var ctx = _ctx;
 	var actors = [];
-	// var room = _room;
 	var input = _input;
 	var canvasWidth = _canvasWidth;
 	var canvasHeight = _canvasHeight;

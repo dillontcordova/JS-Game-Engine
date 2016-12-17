@@ -11,6 +11,13 @@ function Actor(_x, _y, _width, _height, _acceleration) {
 	var xy = new Point( _x, _y);
 	var collisionObj = new Collision(xy, width, height);
 
+    this.collision = function(_otherCollision) {
+        Polymorphism.abstractMethod(this);
+    };
+    this.physics = function (/*_actor*/) {
+        Polymorphism.abstractMethod(this);
+    };
+
 	this.draw = function (_ctx) {
 		_ctx.fillStyle = this.getFillStyle();
 		this.drawActor(_ctx);
@@ -24,12 +31,6 @@ function Actor(_x, _y, _width, _height, _acceleration) {
                 this.physics();
             }
         }
-	};
-	this.collision = function(_otherCollision) {
-		Polymorphism.abstractMethod(this);
-	};
-	this.physics = function (/*_actor*/) {
-		Polymorphism.abstractMethod(this);
 	};
 
 	this.getX = function () {
