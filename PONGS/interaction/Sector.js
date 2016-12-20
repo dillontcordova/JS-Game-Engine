@@ -1,5 +1,5 @@
 /**
- * Created by dillon_cordova on 4/20/2016.
+ * Created by dillon_cordova on 12/20/2016.
  */
 function Sector(_x, _y, _width, _height) {
 	var quadrants		= {};

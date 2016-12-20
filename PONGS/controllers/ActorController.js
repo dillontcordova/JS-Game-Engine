@@ -1,5 +1,5 @@
 /**
- * Created by Dillon_Cordova on 1/4/2016.
+ * Created by Dillon_Cordova on 12/4/2016.
  */
 function ActorController(_ctx, _canvasHeight, _canvasWidth, _input) {
 	var ctx = _ctx;
@@ -18,6 +18,7 @@ function ActorController(_ctx, _canvasHeight, _canvasWidth, _input) {
 	this.tick = function() {
 		for (var i = actors.length - 1; i >= 0; --i) {
             actors[i].tick(actors, input);
+            actors[i].physics();
         }
 	};
 

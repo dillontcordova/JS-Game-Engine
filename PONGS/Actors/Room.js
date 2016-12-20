@@ -1,5 +1,5 @@
 /**
- * Created by dillon_cordova on 3/4/2016.
+ * Created by dillon_cordova on 12/4/2016.
  */
 function Room(_width, _height, _sectorSize) {
 	Assert.is(isPowerOfTwo(_sectorSize), 'Not a proper sector size of a room. Must be a Power of 2!');

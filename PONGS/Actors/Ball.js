@@ -1,5 +1,5 @@
 /**
- * Created by dillon_cordova on 1/4/2016.
+ * Created by dillon_cordova on 12/4/2016.
  */
 Polymorphism.inherits(Ball, Actor);
 function Ball(_x, _y, _width, _height, _acceleration) {

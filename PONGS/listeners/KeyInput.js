@@ -1,5 +1,5 @@
 /**
- * Created by dillon_cordova on 1/4/2016.
+ * Created by dillon_cordova on 12/4/2016.
  */
 //Private static instance variable due to the closure made by "getInstance()".
 var instance = null;

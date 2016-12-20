@@ -1,5 +1,5 @@
 /**
- * Created by dillon_cordova on 1/4/2016.
+ * Created by dillon_cordova on 12/4/2016.
  */
 function Point(/*argumentsCoordinates*/) {
 	Assert.is(arguments.length > 1 && arguments.length < 4, 'Point can only be defined by 2 or 3 coordinate values!');

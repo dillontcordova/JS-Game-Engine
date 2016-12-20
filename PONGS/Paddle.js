@@ -1,5 +1,5 @@
 /**
- * Created by dillon_cordova on 1/3/2016.
+ * Created by dillon_cordova on 12/3/2016.
  */
 Polymorphism.inherits(Paddle, Actor);
 function Paddle(_x, _y, _width, _height, _speed) {

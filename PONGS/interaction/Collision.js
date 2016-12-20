@@ -22,12 +22,15 @@ function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
 		};
 	};
 
+    this.resetCollision = function() {
+        isColliding = false;
+        curHitDirection = 0;
+        isContainedWithin = false;
+    };
+
 	this.checkCollision = function(_otherCollision) {
 		Assert.is( _otherCollision instanceof Collision, 'Can not obtain bound box when object is not an instanceof: "' + Collision.name + '"!');
 
-		isColliding = false;
-		curHitDirection = 0;
-		isContainedWithin = false;
 		var boundBox = this.getBoundBox();
 		otherBoundBox = _otherCollision.getBoundBox();
 

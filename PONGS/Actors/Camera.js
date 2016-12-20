@@ -1,5 +1,5 @@
 /**
- * Created by dillon_cordova on 2/13/2016.
+ * Created by dillon_cordova on 12/13/2016.
  */
 Polymorphism.inherits(Camera, Actor);
 function Camera(_x, _y, _width, _height, _acceleration) {

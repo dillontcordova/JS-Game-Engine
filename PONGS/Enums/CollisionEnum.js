@@ -1,5 +1,5 @@
 /**
- * Created by dillon_cordova on 1/14/2016.
+ * Created by dillon_cordova on 12/14/2016.
  */
 var CollisionEnum = (function() {
 	var top = 1 << 0;

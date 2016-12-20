@@ -1,5 +1,5 @@
 /**
- * Created by dillon_cordova on 1/3/2016.
+ * Created by dillon_cordova on 12/3/2016.
  */
 function Actor(_x, _y, _width, _height, _acceleration) {
 	Polymorphism.abstractClass(this, arguments);
@@ -10,6 +10,7 @@ function Actor(_x, _y, _width, _height, _acceleration) {
 	var height = _height;
 	var xy = new Point( _x, _y);
 	var collisionObj = new Collision(xy, width, height);
+    this.tickActorCompare = {};
 
     this.collision = function(_otherCollision) {
         Polymorphism.abstractMethod(this);
@@ -24,11 +25,11 @@ function Actor(_x, _y, _width, _height, _acceleration) {
 	};
 
 	this.tick = function(_actors, _input) {
+		this.getCollision().resetCollision();
         for(var i = _actors.length - 1; i >= 0; --i) {
 			var curOtherActor = _actors[i];
             if(this != curOtherActor) {
                 this.collision(curOtherActor.getCollision());
-                this.physics();
             }
         }
 	};
