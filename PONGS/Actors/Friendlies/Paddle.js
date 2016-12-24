@@ -9,10 +9,11 @@ function Paddle(_x, _y, _width, _height, _speed) {
     this.physics = function() {
     };
 
-    this.collision = function(_otherCollision) {
-    };
+	this.collidedWithObject = function(_otherCollision) {
+	};
 
 	this.tick = function(_actors, input) {
+		this.getCollisionObj().checkCollision(this, _actors);
 		var y;
 		var x;
 

@@ -12,9 +12,6 @@ function Actor(_x, _y, _width, _height, _acceleration) {
 	var collisionObj = new Collision(xy, width, height);
 	ActorController.addActor(this);
 
-    this.physics = function (/*_actor*/) {
-        Polymorphism.abstractMethod(this);
-    };
 
 	this.draw = function (_ctx) {
 		_ctx.fillStyle = this.getFillStyle();
@@ -52,6 +49,12 @@ function Actor(_x, _y, _width, _height, _acceleration) {
 	};
 	this.getCollisionBoundBox = function () {
 		return collisionObj.getBoundBox();
+	};
+	this.collidedWithObject = function(/*_otherCollision*/) {
+		Polymorphism.abstractMethod(this);
+	};
+	this.physics = function (/*_actor*/) {
+		Polymorphism.abstractMethod(this);
 	};
 	this.getFillStyle = function () {
 		Polymorphism.abstractMethod(this);

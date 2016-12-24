@@ -34,8 +34,8 @@ function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
 			if(_mainActor != otherActor) {
 				var otherActorCollision = otherActor.getCollisionObj();
 				if(mainActorCollision.isCollidingWith(otherActorCollision)) {
-					// _mainActor.collidedWithObject(otherActorCollision);
-					// otherActor.collidedWithObject(mainActorCollision);
+					_mainActor.collidedWithObject(otherActorCollision);
+					otherActor.collidedWithObject(mainActorCollision);
 					return true;
 				}
 			}
@@ -108,12 +108,10 @@ function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
 	this.isCollidingBottom = function() {
 		return (curHitDirection & CollisionEnum.BOTTOM) != 0;
 	};
-	this.isColliding = function() {
-		return isColliding;
-	};
 	this.isContainedWithin = function() {
 		return isContainedWithin;
 	};
-	
-
+	this.isColliding = function() {
+		return isColliding;
+	};
 }

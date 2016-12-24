@@ -8,7 +8,7 @@ function Wall(_x, _y, _width, _height, _speed) {
     this.physics = function() {
     };
 
-    this.collision = function(_otherCollision) {
+    this.collidedWithObject = function(_otherCollision) {
     };
     this.getFillStyle = function() {
         return "yellow";
