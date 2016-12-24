@@ -19,7 +19,7 @@ var Polymorphism = (function() {
 			var constructor = _instance.constructor;
 			throw new Error('Function-Class "' + constructor.name + '" has not overriden all parent abstract methods!');
 		},
-
+		
 		/*Called at the beginning of the file; of which the class is inheriting from the parent*/
 		inherits: function(_child, _parent) {
 			Assert.is( !!_child && !!_parent, 'Both a Child and a Parent Function-Class must be present in order to properly call the inherits method!');

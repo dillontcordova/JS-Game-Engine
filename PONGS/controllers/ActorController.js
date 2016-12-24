@@ -1,38 +1,54 @@
 /**
  * Created by Dillon_Cordova on 12/4/2016.
  */
-function ActorController(_ctx, _canvasHeight, _canvasWidth, _input) {
-	var ctx = _ctx;
-	var actors = [];
-	var input = _input;
-	var canvasWidth = _canvasWidth;
-	var canvasHeight = _canvasHeight;
+var ActorController = (function () {
+    var actorList;
+    var enemyList;
+    var friendlyList;
 
-	this.addActors = function(__actors) {
-		for (var i = __actors.length - 1; i >= 0; i--) {
-			Assert.is( __actors[i] instanceof Actor, "Can only add actors to this controller!" );
-			actors.push(__actors[i]);
-		}
-	};
+    return {
+        ctx: null,
+        input: null,
+        canvasWidth: null,
+        canvasHeight: null,
 
-	this.tick = function() {
-		for (var i = actors.length - 1; i >= 0; --i) {
-            actors[i].tick(actors, input);
-            actors[i].physics();
+        init: function (_ctx, _canvasHeight, _canvasWidth, _input) {
+            actorList = [];
+            enemyList = [];
+            friendlyList = [];
+
+            this.ctx =_ctx;
+            this.input = _input;
+            this.canvasWidth = _canvasWidth;
+            this.canvasHeight = _canvasHeight;
+        },
+        addActor: function(_actor) {
+            Assert.is( _actor instanceof Actor, "Can only add of class Actor to the addActor method in ActorController!" );
+            actorList.push(_actor);
+        },
+        addEnemy: function(_actor) {
+            Assert.is( _actor instanceof Enemy, "Can only add of class Enemy to the addEnemy method in ActorController!" );
+            enemyList.push(_actor);
+        },
+        addFriendly: function(_actor) {
+            Assert.is( _actor instanceof Actor, "Can only add actors to this controller!" );
+            friendlyList.push(_actor);
+        },
+
+        tick: function() {
+            for (var i = actorList.length - 1; i >= 0; --i) {
+                // actorList[i].input(input);
+                actorList[i].tick(actorList, this.input);
+                actorList[i].physics();
+            }
+        },
+
+        render: function() {
+            this.ctx.clearRect( 0, 0, this.canvasWidth, this.canvasHeight );
+            for (var i = actorList.length - 1; i >= 0; i--) {
+                actorList[i].draw(this.ctx);
+            }
         }
-	};
+    };
 
-	// this.addViews = function(__actors) {
-	// 	for (var i = __actors.length - 1; i >= 0; i--) {
-	// 		Assert.is( __actors[i] instanceof View, "Can only apply actors to this controller!" );
-	// 		actors.push(__actors[i]);
-	// 	}
-	// };
-
-	this.render = function() {
-		ctx.clearRect( 0, 0, canvasWidth, canvasHeight );
-		for (var i = actors.length - 1; i >= 0; i--) {
-			actors[i].draw(ctx, canvasHeight, canvasWidth);
-		}
-	};
-}
+})();

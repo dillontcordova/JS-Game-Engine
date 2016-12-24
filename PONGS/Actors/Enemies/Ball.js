@@ -1,20 +1,16 @@
 /**
  * Created by dillon_cordova on 12/4/2016.
  */
-Polymorphism.inherits(Ball, Actor);
+Polymorphism.inherits(Ball, Enemy);
 function Ball(_x, _y, _width, _height, _acceleration) {
-	Actor.call(this, _x, _y, _width, _height, _acceleration);
-	var curBoundBox = this.getCollision();
+	Enemy.call(this, _x, _y, _width, _height, _acceleration);
+	var curBoundBox = this.getCollisionObj();
 
 	this.getFillStyle = function() {
 		return "orange";
    	};
-	this.drawActor = function(_ctx) {
-		_ctx.fillRect( this.getX(), this.getY(), this.getWidth(), this.getHeight() );
-	};
 
-    this.collision = function(_otherCollision) {
-        curBoundBox.checkCollision(_otherCollision);
+    this.collidedWithObject = function(_otherCollision) {
     };
 
 	this.physics = function() {

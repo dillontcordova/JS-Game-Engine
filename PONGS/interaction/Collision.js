@@ -1,12 +1,11 @@
 /**
- * Created by dillon_cordova on 1/4/2016.
+ * Created by dillon_cordova on 12/4/2016.
  */
 function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
 	var isColliding;
 	var width = _width;
 	var height = _height;
 	var xyPoint = _xyPoint;
-	var otherBoundBox = {};
 	var curHitDirection = 0;
 	var isContainedWithin = false;
 	var usingPixelPerfect = _usingPixelPerfect || false;
@@ -28,11 +27,27 @@ function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
         isContainedWithin = false;
     };
 
-	this.checkCollision = function(_otherCollision) {
+	this.checkCollision = function(_mainActor, _actorList) {
+		var mainActorCollision = _mainActor.getCollisionObj();
+		for(var i = 0, len = _actorList.length; i < len; ++i) {
+			var otherActor = _actorList[i];
+			if(_mainActor != otherActor) {
+				var otherActorCollision = otherActor.getCollisionObj();
+				if(mainActorCollision.isCollidingWith(otherActorCollision)) {
+					// _mainActor.collidedWithObject(otherActorCollision);
+					// otherActor.collidedWithObject(mainActorCollision);
+					return true;
+				}
+			}
+		}
+	};
+
+	this.isCollidingWith = function(_otherCollision) {
 		Assert.is( _otherCollision instanceof Collision, 'Can not obtain bound box when object is not an instanceof: "' + Collision.name + '"!');
 
+		this.resetCollision();
 		var boundBox = this.getBoundBox();
-		otherBoundBox = _otherCollision.getBoundBox();
+		var otherBoundBox = _otherCollision.getBoundBox();
 
 		if( boundBox.top < otherBoundBox.bottom &&
 			boundBox.bottom > otherBoundBox.top &&
@@ -62,20 +77,21 @@ function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
 			}
 		}
 		xyPoint.unlockPoint();
+		return isColliding;
 	};
 
-    this.correctCollision = function() {
+    this.correctCollision = function(_otherBoundBox) {
         if((curHitDirection & CollisionEnum.TOP) != 0) {
-            xyPoint.setY(otherBoundBox.bottom);
+            xyPoint.setY(_otherBoundBox.bottom);
             xyPoint.lockPoint();
         }else if((curHitDirection & CollisionEnum.BOTTOM) != 0) {
-            xyPoint.setY(otherBoundBox.top - height);
+            xyPoint.setY(_otherBoundBox.top - height);
             xyPoint.lockPoint();
         } else if((curHitDirection & CollisionEnum.LEFT) != 0) {
-            xyPoint.setX(otherBoundBox.right);
+            xyPoint.setX(_otherBoundBox.right);
             xyPoint.lockPoint();
         } else if((curHitDirection & CollisionEnum.LEFT) != 0) {
-            xyPoint.setX(otherBoundBox.left - width);
+            xyPoint.setX(_otherBoundBox.left - width);
             xyPoint.lockPoint();
         }
     };
@@ -98,4 +114,6 @@ function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
 	this.isContainedWithin = function() {
 		return isContainedWithin;
 	};
+	
+
 }

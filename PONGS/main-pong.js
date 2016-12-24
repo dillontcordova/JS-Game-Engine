@@ -5,35 +5,29 @@
 	Assert.setDebugModeTo(true);
 	Assert.setDevelopModeTo(true);
 
-	var actors			= [];
-	var controller		= null;
 	var game			= new Game();
 	var input			= new KeyInput();
-
 	var canvasWidth		= game.getCanvasWidth();
 	var canvasHeight	= game.getCanvasHeight();
 
     (function() {
-        actors.push(	new Wall(0, 0, canvasWidth, 5, 0)		                );
-        actors.push(	new Wall(0, 0, 5, canvasHeight, 0)	                    );
-        actors.push(	new Wall(0, canvasHeight, canvasWidth, 5, 0)	        );
-        actors.push(	new Wall(canvasWidth, 0, 5, canvasHeight, 0)	        );
-
-        actors.push(	new LeftPaddle(0, canvasHeight/2, 15, 45, 5)				);
-        actors.push(	new Ball(canvasWidth/2, ((canvasHeight/2) + 10), 10, 10, 2)	);
-        actors.push(	new RightPaddle(canvasWidth-20, canvasHeight/2, 15, 45, 5)	);
+		ActorController.init(game.getCanvasCtx(), canvasHeight, canvasWidth, input);
+        // new Wall(0, 0, canvasWidth, 5, 0)		   ;
+        // new Wall(0, 0, 5, canvasHeight, 0)	       ;
+        // new Wall(0, canvasHeight, canvasWidth, 5, 0);
+        // new Wall(canvasWidth, 0, 5, canvasHeight, 0);
+		new LeftPaddle(0, canvasHeight/2, 15, 45, 5);
+		new Ball(canvasWidth/2, ((canvasHeight/2) + 10), 10, 10, 2);
+		new RightPaddle(canvasWidth-20, canvasHeight/2, 15, 45, 5);
     })();
 
-
-	controller = new ActorController(game.getCanvasCtx(), canvasHeight, canvasWidth, input);
-	controller.addActors(actors);
-
 	(function GameLoop() {
-		controller.tick();
+		ActorController.tick();
 		setTimeout(GameLoop, 16.6666);
 	})();
 	(function RenderLoop() {
-		controller.render();
-		setTimeout(RenderLoop, 33.3333);
+		ActorController.render();
+		setTimeout(RenderLoop, 16.6666);
 	})();
 })();
+

@@ -4,7 +4,7 @@
 Polymorphism.inherits(Camera, Actor);
 function Camera(_x, _y, _width, _height, _acceleration) {
 	Actor.call(this, _x, _y, _width, _height, _acceleration);
-	var curBoundBox = this.getCollision();
+	var curBoundBox = this.getCollisionObj();
 
 	this.getFillStyle = function() {
 		return "red";
