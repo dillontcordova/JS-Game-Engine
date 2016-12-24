@@ -58,6 +58,8 @@ var KeyInput = function() {
 
 //Held outside the Function-Class to make it a public static method which then utilizes the closure of the "instance" var; to make it a private static var.
 KeyInput.getInstance = function() {
-	
+	if(!instance) {
+		return new KeyInput();
+	}
 	return instance;
 };

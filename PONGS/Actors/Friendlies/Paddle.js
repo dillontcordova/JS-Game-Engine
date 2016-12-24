@@ -5,8 +5,13 @@ Polymorphism.inherits(Paddle, Friendly);
 function Paddle(_x, _y, _width, _height, _speed) {
     Polymorphism.abstractClass(this, arguments);
 	Friendly.apply(this, arguments);
+	var speed = _speed;
 
-    this.physics = function() {
+
+	this.subTick = function() {
+	};
+	
+	this.physics = function() {
     };
 
 	this.collidedWithObject = function(_otherCollision) {
@@ -21,14 +26,14 @@ function Paddle(_x, _y, _width, _height, _speed) {
 		}
 		if( input.isPressed('up_arrow') ) {
 			y = this.getY();
-			this.setY(y - 5);
+			this.setY(y - speed);
 		}
 		if( input.isPressed('right_arrow') ) {
 		}
 
 		if( input.isPressed('down_arrow') ) {
 			y = this.getY();
-			this.setY(y + 5);
+			this.setY(y + speed);
 		}
 	};
 }

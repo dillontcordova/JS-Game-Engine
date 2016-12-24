@@ -5,21 +5,23 @@
 	Assert.setDebugModeTo(true);
 	Assert.setDevelopModeTo(true);
 
-	var game			= new Game();
-	var input			= new KeyInput();
-	var canvasWidth		= game.getCanvasWidth();
-	var canvasHeight	= game.getCanvasHeight();
-
-    (function() {
-		ActorController.init(game.getCanvasCtx(), canvasHeight, canvasWidth, input);
-        // new Wall(0, 0, canvasWidth, 5, 0)		   ;
-        // new Wall(0, 0, 5, canvasHeight, 0)	       ;
-        // new Wall(0, canvasHeight, canvasWidth, 5, 0);
-        // new Wall(canvasWidth, 0, 5, canvasHeight, 0);
-		new LeftPaddle(0, canvasHeight/2, 15, 45, 5);
-		new Ball(canvasWidth/2, ((canvasHeight/2) + 10), 10, 10, 2);
-		new RightPaddle(canvasWidth-20, canvasHeight/2, 15, 45, 5);
-    })();
+	Game.init();
+	// var input			= Game.getKeyInput();
+	// var ctx				= Game.getCanvasCtx();
+	// var canvasWidth		= Game.getCanvasWidth();
+	// var canvasHeight	= Game.getCanvasHeight();
+    //
+    // (function ActorInit() {
+	// 	ActorController.init(ctx, canvasHeight, canvasWidth, input);
+    //
+	// 	new Wall(0, 0, canvasWidth, 5, 0)				;
+     //    new Wall(0, canvasHeight-5, canvasWidth, 5, 0)	;
+    //
+	// 	new LeftPaddle(0, canvasHeight/2, 15, 45, 3)				;
+	// 	new RightPaddle(canvasWidth-20, canvasHeight/2, 15, 45, 3)	;
+	// 	new Ball(canvasWidth/2, ((canvasHeight/2) + 10), 10, 10, 2)	;
+    //
+	// })();
 
 	(function GameLoop() {
 		ActorController.tick();

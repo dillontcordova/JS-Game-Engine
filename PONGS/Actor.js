@@ -12,20 +12,36 @@ function Actor(_x, _y, _width, _height, _acceleration) {
 	var collisionObj = new Collision(xy, width, height);
 	ActorController.addActor(this);
 
+	//Abstract Methods
+	this.subTick = function(/*_actors*/) {
+		Polymorphism.abstractMethod(this);
+	};
+	this.collidedWithObject = function(/*_otherCollision*/) {
+		Polymorphism.abstractMethod(this);
+	};
+	this.physics = function (/*_actor*/) {
+		Polymorphism.abstractMethod(this);
+	};
+	this.getFillStyle = function () {
+		Polymorphism.abstractMethod(this);
+	};
 
+	//Public Methods
 	this.draw = function (_ctx) {
 		_ctx.fillStyle = this.getFillStyle();
 		this.drawActor(_ctx);
 	};
 
 	this.tick = function(_actors) {
-		this.getCollisionObj().checkCollision(this, _actors);
+		collisionObj.checkCollision(this, _actors);
+		this.subTick();
 	};
 
 	this.drawActor = function(_ctx) {
 		_ctx.fillRect( this.getX(), this.getY(), this.getWidth(), this.getHeight() );
 	};
 
+	//Privileged Methods
 	this.getX = function () {
 		return xy.getX();
 	};
@@ -49,15 +65,6 @@ function Actor(_x, _y, _width, _height, _acceleration) {
 	};
 	this.getCollisionBoundBox = function () {
 		return collisionObj.getBoundBox();
-	};
-	this.collidedWithObject = function(/*_otherCollision*/) {
-		Polymorphism.abstractMethod(this);
-	};
-	this.physics = function (/*_actor*/) {
-		Polymorphism.abstractMethod(this);
-	};
-	this.getFillStyle = function () {
-		Polymorphism.abstractMethod(this);
 	};
 	this.setX = function (__x) {
 		xy.setX(__x);

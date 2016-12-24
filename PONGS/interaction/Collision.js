@@ -2,6 +2,7 @@
  * Created by dillon_cordova on 12/4/2016.
  */
 function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
+	var boundBox;
 	var isColliding;
 	var width = _width;
 	var height = _height;
@@ -42,11 +43,18 @@ function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
 		}
 	};
 
+	this.isOutsideOf = function(_otherBoundBox) {
+		return	!(boundBox.top < _otherBoundBox.bottom &&
+				boundBox.bottom > _otherBoundBox.top &&
+				boundBox.right > _otherBoundBox.left &&
+				boundBox.left < _otherBoundBox.right);
+	};
+
 	this.isCollidingWith = function(_otherCollision) {
 		Assert.is( _otherCollision instanceof Collision, 'Can not obtain bound box when object is not an instanceof: "' + Collision.name + '"!');
 
 		this.resetCollision();
-		var boundBox = this.getBoundBox();
+		boundBox = this.getBoundBox();
 		var otherBoundBox = _otherCollision.getBoundBox();
 
 		if( boundBox.top < otherBoundBox.bottom &&

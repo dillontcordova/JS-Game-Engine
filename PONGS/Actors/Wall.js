@@ -5,6 +5,9 @@ Polymorphism.inherits(Wall, Actor);
 function Wall(_x, _y, _width, _height, _speed) {
     Actor.call(this, _x, _y, _width, _height, _speed);
 
+    this.subTick = function() {
+    };
+
     this.physics = function() {
     };
 
