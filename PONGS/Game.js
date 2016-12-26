@@ -24,12 +24,11 @@ var Game = (function() {
 			(function ActorInit() {
 				ActorController.init(context, height, width, keyInput);
 
-				new Wall(0, 0, width, 5, 0)				;
-				new Wall(0, height-5, width, 5, 0)	;
-
-				new LeftPaddle(0, height/2, 15, 45, 3)				;
-				new RightPaddle(width-20, height/2, 15, 45, 3)	;
-				new Ball(width/2, ((height/2) + 10), 10, 10, 2)	;
+				new Wall(0, 0, width, 5, 0)						;
+				new Wall(0, height-5, width, 5, 0)				;
+				new LeftPaddle(0, height/2, 15, 45, 1)			;
+				new RightPaddle(width-20, height/2, 15, 45, 1)	;
+				new Ball(width/2, ((height/2) + 10), 10, 10, 1)	;
 
 			})();
 		},

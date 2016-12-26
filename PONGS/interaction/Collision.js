@@ -35,8 +35,8 @@ function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
 			if(_mainActor != otherActor) {
 				var otherActorCollision = otherActor.getCollisionObj();
 				if(mainActorCollision.isCollidingWith(otherActorCollision)) {
-					_mainActor.collidedWithObject(otherActorCollision);
-					otherActor.collidedWithObject(mainActorCollision);
+					_mainActor.collidedWithObject(otherActor, otherActorCollision);
+					otherActor.collidedWithObject(_mainActor, mainActorCollision);
 					return true;
 				}
 			}

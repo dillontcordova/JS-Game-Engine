@@ -1,11 +1,11 @@
 /**
  * Created by dillon_cordova on 12/3/2016.
  */
-function Actor(_x, _y, _width, _height, _acceleration) {
+function Actor(_x, _y, _width, _height, _speed) {
 	Polymorphism.abstractClass(this, arguments);
 
-	var velX = 5;
 	var velY = 0;
+	var velX = _speed;
 	var width = _width;
 	var height = _height;
 	var xy = new Point( _x, _y);
