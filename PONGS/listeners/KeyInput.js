@@ -44,6 +44,9 @@ var KeyInput = function() {
 		return pressedKeys[currentKeyPressed] ? true : false;
 	};
 
+	this.getKeyEnums = function () {
+		return KeyEnums;
+	};
 	//Not sure what this is for (maybe its an overide to the documents prebuilt "keypress" default function)
 	// this.addKeyPressListener = function(_keyCode, _callback) {
 	// 	document.addEventListener("keypress", function(e) {

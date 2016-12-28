@@ -1,5 +1,5 @@
 /**
- * Created by dillon_cordova on 12/4/2016.
+ * Created by dillon_cordova on 12/14/2016.
  */
 function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
 	var boundBox;
@@ -43,11 +43,18 @@ function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
 		}
 	};
 
-	this.isOutsideOf = function(_otherBoundBox) {
-		return	!(boundBox.top < _otherBoundBox.bottom &&
-				boundBox.bottom > _otherBoundBox.top &&
-				boundBox.right > _otherBoundBox.left &&
-				boundBox.left < _otherBoundBox.right);
+	this.isWithinBounds = function(_otherBoundBox) {
+		return (boundBox.top < _otherBoundBox.bottom &&
+		boundBox.bottom > _otherBoundBox.top &&
+		boundBox.right > _otherBoundBox.left &&
+		boundBox.left < _otherBoundBox.right);
+	};
+
+	this.escape = function(_otherBoundBox) {
+		if( boundBox.right > _otherBoundBox.right && boundBox.left >= _otherBoundBox.left ) {
+			return CollisionEnum.RIGHT;
+		}
+		return CollisionEnum.LEFT;
 	};
 
 	this.isCollidingWith = function(_otherCollision) {
@@ -57,26 +64,22 @@ function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
 		boundBox = this.getBoundBox();
 		var otherBoundBox = _otherCollision.getBoundBox();
 
-		if( boundBox.top < otherBoundBox.bottom &&
-			boundBox.bottom > otherBoundBox.top &&
-			boundBox.right > otherBoundBox.left &&
-			boundBox.left < otherBoundBox.right
-		){
+		if( this.isWithinBounds(otherBoundBox) ){
 			isColliding = true;
             
-			if( boundBox.bottom >= otherBoundBox.bottom && boundBox.top >= otherBoundBox.top ) {
+			if( boundBox.bottom > otherBoundBox.bottom && boundBox.top >= otherBoundBox.top ) {
 				curHitDirection |= CollisionEnum.TOP;
 				//debugger;
 			}
-			if( boundBox.top <= otherBoundBox.top && boundBox.bottom <= otherBoundBox.bottom ) {
+			if( boundBox.top < otherBoundBox.top && boundBox.bottom <= otherBoundBox.bottom ) {
 				curHitDirection |= CollisionEnum.BOTTOM;
 				//debugger;
 			}
-			if( boundBox.right >= otherBoundBox.right && boundBox.left >= otherBoundBox.left ) {
+			if( boundBox.right > otherBoundBox.right && boundBox.left >= otherBoundBox.left ) {
 				curHitDirection |= CollisionEnum.LEFT;
 				//debugger;
 			}
-			if( boundBox.left <= otherBoundBox.left && boundBox.right <= otherBoundBox.right) {
+			if( boundBox.left < otherBoundBox.left && boundBox.right <= otherBoundBox.right) {
 				curHitDirection |= CollisionEnum.RIGHT;
 				//debugger;
 			}

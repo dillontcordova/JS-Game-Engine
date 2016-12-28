@@ -5,8 +5,11 @@ Polymorphism.inherits(Paddle, Friendly);
 function Paddle(_x, _y, _width, _height, _speed) {
     Polymorphism.abstractClass(this, arguments);
 	Friendly.apply(this, arguments);
-	var speed = _speed;
 
+	var collisionObj = this.getCollisionObj();
+	var speed = _speed;
+	var keyEnums = ActorController.input.getKeyEnums();
+	var curScore = 0;
 
 	this.subTick = function() {
 	};
@@ -18,22 +21,26 @@ function Paddle(_x, _y, _width, _height, _speed) {
 	};
 
 	this.tick = function(_actors, input) {
-		this.getCollisionObj().checkCollision(this, _actors);
-		var y;
-		var x;
+		collisionObj.checkCollision(this, _actors);
 
-		if( input.isPressed('left_arrow') ) {			
+		if( input.isPressed(keyEnums.LEFT_ARROW) ) {
 		}
-		if( input.isPressed('up_arrow') ) {
-			y = this.getY();
-			this.setY(y - speed);
+		if( input.isPressed(keyEnums.UP_ARROW) ) {
+			this.setY(this.getY() - speed);
 		}
-		if( input.isPressed('right_arrow') ) {
+		if( input.isPressed(keyEnums.RIGHT_ARROW) ) {
 		}
 
-		if( input.isPressed('down_arrow') ) {
-			y = this.getY();
-			this.setY(y + speed);
+		if( input.isPressed(keyEnums.DOWN_ARROW) ) {
+			this.setY(this.getY() + speed);
 		}
+	};
+
+	this.getCurScore = function() {
+		return curScore;
+	};
+
+	this.setCurScore = function(_curScore) {
+		curScore = _curScore;
 	};
 }

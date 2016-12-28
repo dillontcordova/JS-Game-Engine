@@ -37,9 +37,9 @@ var ActorController = (function () {
 
         tick: function() {
             for (var i = actorList.length - 1; i >= 0; --i) {
-                // actorList[i].input(input);
-                actorList[i].tick(actorList, this.input);
-                actorList[i].physics();
+                var curActor = actorList[i];
+                curActor.tick(actorList, this.input);
+                curActor.physics();
             }
         },
 

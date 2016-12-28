@@ -7,25 +7,50 @@ var Game = (function() {
 	var width;
 	var canvas;
 	var height;
-	var context;
+	var ctx;
 	var keyInput;
+	var gameScore;
+	var player1Num;
+	var player2Num;
+	var sideScoreAnimation = 0;
 
 	return {
 		//privileged:
 		init: function() {
 			canvas = document.getElementById("game");
-			context = canvas.getContext("2d");
+			gameScore = document.getElementById("game-score");
+			ctx = canvas.getContext("2d");
 			height = canvas.height;
 			width = canvas.width;
-			keyInput = KeyInput.getInstance();
-			room = new Room(0, 0, width, height);
 			
+			keyInput = KeyInput.getInstance();
+			room = new Room(10, 0, width-10, height);
+			player1Num = 0;
+			player2Num = 0;
+
 			//temp
 			(function ActorInit() {
-				ActorController.init(context, height, width, keyInput);
+				ActorController.init(ctx, height, width, keyInput);
+				new Wall(0, 30, width, 5, 0)					; // top
+				new Wall(0, height-35, width, 5, 0)				; // bottom
+				new LeftPaddle(0, height/2, 15, 45, 1)			;
+				new RightPaddle(width-20, height/2, 15, 45, 1)	;
+				new Ball(width/2, ((height/2) + 10), 10, 10, 1)	;
+				ActorController.render();
+			})();
+		},
 
-				new Wall(0, 0, width, 5, 0)						;
-				new Wall(0, height-5, width, 5, 0)				;
+		resetLevel: function() {
+			if(player1Num > 4 || player2Num > 4) {
+				//game over
+			}
+
+			//temp
+			(function ActorInit() {
+				ActorController.init(ctx, height, width, keyInput);
+
+				new Wall(0, 30, width, 5, 0)					; // top
+				new Wall(0, height-35, width, 5, 0)				; // bottom
 				new LeftPaddle(0, height/2, 15, 45, 1)			;
 				new RightPaddle(width-20, height/2, 15, 45, 1)	;
 				new Ball(width/2, ((height/2) + 10), 10, 10, 1)	;
@@ -40,13 +65,28 @@ var Game = (function() {
 			return height;
 		},
 		getCanvasCtx: function() {
-			return context;
+			return ctx;
 		},
 		getKeyInput: function () {
 			return keyInput;
 		},
 		getRoom: function() {
 			return room;
+		},
+		incrementPlayer0GameScore: function() {
+			player1Num++;
+			this.updateScoreText(0);
+		},
+		incrementPlayer1GameScore: function() {
+			player2Num++;
+			this.updateScoreText(1);
+		},
+		updateScoreText: function (_sideScoreAnimation) {
+			gameScore.setAttribute('activate-effect', _sideScoreAnimation);
+			setTimeout(function () {
+				gameScore.removeAttribute('activate-effect');
+			}, 1000);
+			gameScore.innerText = player1Num + ' | ' + player2Num;
 		}
 	}
 })();

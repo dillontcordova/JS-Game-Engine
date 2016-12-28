@@ -1,26 +1,31 @@
 /**
  * Created by dillon_cordova on 12/3/2016.
  */
-(function Main() {
+(function Main(global) {
 	Assert.setDebugModeTo(true);
 	Assert.setDevelopModeTo(true);
 
+	const oneSec = 1000;
 	const CALC_FPS = 300;
 	const RENDER_FPS = 60;
-	const oneSec = 1000;
 	var frameRenderDuration = oneSec / RENDER_FPS;
 	var frameCalcDuration = oneSec / CALC_FPS;
 
 	Game.init();
 
-	(function GameLoop() {
-		ActorController.tick();
-		setTimeout(GameLoop, frameCalcDuration);
-	})();
-	(function RenderLoop() {
+	global.start = function(){
+		var asd = document.getElementById("game-start-screen");
+			asd.setAttribute('class', 'hidden');
 
-		ActorController.render();
-		setTimeout(RenderLoop, frameRenderDuration);
-	})();
-})();
+		(function CalcLoop() {
+			ActorController.tick();
+			setTimeout(CalcLoop, frameCalcDuration);
+		})();
+		(function RenderLoop() {
+			ActorController.render();
+			setTimeout(RenderLoop, frameRenderDuration);
+		})();
+	};
+
+})(this);
 

@@ -27,6 +27,8 @@ var Polymorphism = (function() {
 			TempConstructor.prototype = _parent.prototype;
 			_child.prototype = new TempConstructor();
 			_child.prototype.constructor = _child;
+
+			_child.super = _parent.prototype;
 		}
 	};
 })();

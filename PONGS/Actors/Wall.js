@@ -14,7 +14,7 @@ function Wall(_x, _y, _width, _height, _speed) {
     this.collidedWithObject = function(_otherCollision) {
     };
     this.getFillStyle = function() {
-        return "yellow";
+        return "white";
     };
     this.drawActor = function(_ctx) {
         _ctx.fillRect( this.getX(), this.getY(), this.getWidth(), this.getHeight() );
