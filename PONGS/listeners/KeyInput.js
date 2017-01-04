@@ -1,7 +1,7 @@
 /**
  * Created by dillon_cordova on 12/4/2016.
  */
-//Private static instance letiable due to the closure made by "getInstance()".
+//Private static instance variable due to the closure made by "getInstance()".
 let instance = null;
 
 let KeyInput = function() {
@@ -10,11 +10,19 @@ let KeyInput = function() {
 	instance = this;
     let pressedKeys = [];
     let releasedKeys = [];
+
 	let KeyEnums = {
 		LEFT_ARROW: 37,
 		UP_ARROW: 38,
 		RIGHT_ARROW: 39,
-		DOWN_ARROW: 40
+		DOWN_ARROW: 40,
+		SPACE_BAR: 32,
+        PLUS_SIGN: 107,
+		W: 87,
+		A: 65,
+		S: 83,
+		D: 68,
+		F: 70
 	};
 
 	this.keyDown = function(e) {
@@ -36,12 +44,12 @@ let KeyInput = function() {
 
     this.isReleased = function(_key) {
         let currentKeyReleased = this.getKey(_key);
-        return [currentKeyReleased] ? true : false;
+        return [currentKeyReleased];
     };
 
     this.isPressed = function(_key) {
         let currentKeyPressed = this.getKey(_key);
-		return pressedKeys[currentKeyPressed] ? true : false;
+		return pressedKeys[currentKeyPressed];
 	};
 
 	this.getKeyEnums = function () {

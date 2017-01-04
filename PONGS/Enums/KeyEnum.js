@@ -1,7 +1,7 @@
 /**
  * Created by dillon_cordova on 12/14/2016.
  */
-var KeyEnum = (function() {
+let KeyEnum = (function() {
 	return {
 		LEFT_ARROW_KEY: 37,
 		UP_ARROW_KEY: 38,

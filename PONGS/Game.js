@@ -1,18 +1,18 @@
 /**
  * Created by dillon_cordova on 12/3/2016.
  */
-var Game = (function() {
+let Game = (function() {
 	//private:
-	var room;
-	var width;
-	var canvas;
-	var height;
-	var ctx;
-	var keyInput;
-	var gameScore;
-	var player1Num;
-	var player2Num;
-	var sideScoreAnimation = 0;
+	let room;
+	let width;
+	let canvas;
+	let height;
+	let ctx;
+	let keyInput;
+	let gameScore;
+	let player1Num;
+	let player2Num;
+	let sideScoreAnimation = 0;
 
 	return {
 		//privileged:

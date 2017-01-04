@@ -8,14 +8,14 @@
 	const oneSec = 1000;
 	const CALC_FPS = 300;
 	const RENDER_FPS = 60;
-	var frameRenderDuration = oneSec / RENDER_FPS;
-	var frameCalcDuration = oneSec / CALC_FPS;
+	let frameRenderDuration = oneSec / RENDER_FPS;
+	let frameCalcDuration = oneSec / CALC_FPS;
 
 	Game.init();
 
 	global.start = function(){
-		var asd = document.getElementById("game-start-screen");
-			asd.setAttribute('class', 'hidden');
+		let gameStartScreen = document.getElementById("game-start-screen");
+		gameStartScreen.setAttribute('class', 'hidden');
 
 		(function CalcLoop() {
 			ActorController.tick();

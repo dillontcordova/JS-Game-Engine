@@ -4,7 +4,7 @@
 Polymorphism.inherits(Ball, Enemy);
 function Ball(_x, _y, _width, _height, _acceleration) {
 	Enemy.call(this, _x, _y, _width, _height, _acceleration);
-    var collisionObj = this.getCollisionObj();
+    let collisionObj = this.getCollisionObj();
 
     this.getFillStyle = function() {
 		return "white";
@@ -28,7 +28,7 @@ function Ball(_x, _y, _width, _height, _acceleration) {
 
     this.subTick = function(_actors) {
         //Ball.super.tick().call(this); // add later
-        var roomBoundBox = Game.getRoom().getBoundBox();
+        let roomBoundBox = Game.getRoom().getBoundBox();
         if( !collisionObj.isWithinBounds(roomBoundBox) ){
             Game.resetLevel();
             if( collisionObj.escape(roomBoundBox) == CollisionEnum.RIGHT ){

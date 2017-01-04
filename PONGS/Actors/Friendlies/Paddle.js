@@ -6,18 +6,23 @@ function Paddle(_x, _y, _width, _height, _speed) {
     Polymorphism.abstractClass(this, arguments);
 	Friendly.apply(this, arguments);
 
-	var collisionObj = this.getCollisionObj();
-	var speed = _speed;
-	var keyEnums = ActorController.input.getKeyEnums();
-	var curScore = 0;
+    let curScore = 0;
+    let speed = _speed;
+    let collisionObj = this.getCollisionObj();
+    let keyEnums = ActorController.input.getKeyEnums();
 
-	this.subTick = function() {
-	};
-	
-	this.physics = function() {
+    this.movedUp = function movedUp(/*_input, _keyEnums*/) {
+        Polymorphism.abstractMethod(this);
+    };
+    this.movedDown = function movedDown(/*_input, _keyEnums*/) {
+        Polymorphism.abstractMethod(this);
     };
 
-	this.collidedWithObject = function(_otherCollision) {
+    this.subTick = function() {
+	};
+	this.physics = function() {
+    };
+    this.collidedWithObject = function(_otherCollision) {
 	};
 
 	this.tick = function(_actors, input) {
@@ -25,13 +30,13 @@ function Paddle(_x, _y, _width, _height, _speed) {
 
 		if( input.isPressed(keyEnums.LEFT_ARROW) ) {
 		}
-		if( input.isPressed(keyEnums.UP_ARROW) ) {
+		if( this.movedUp(input, keyEnums) ) {
 			this.setY(this.getY() - speed);
 		}
 		if( input.isPressed(keyEnums.RIGHT_ARROW) ) {
 		}
 
-		if( input.isPressed(keyEnums.DOWN_ARROW) ) {
+		if( this.movedDown(input, keyEnums) ) {
 			this.setY(this.getY() + speed);
 		}
 	};
