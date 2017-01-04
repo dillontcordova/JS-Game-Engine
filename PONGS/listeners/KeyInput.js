@@ -1,16 +1,16 @@
 /**
  * Created by dillon_cordova on 12/4/2016.
  */
-//Private static instance variable due to the closure made by "getInstance()".
-var instance = null;
+//Private static instance letiable due to the closure made by "getInstance()".
+let instance = null;
 
-var KeyInput = function() {
+let KeyInput = function() {
 	Polymorphism.singletonClass(instance);
 
 	instance = this;
-    var pressedKeys = [];
-    var releasedKeys = [];
-	var KeyEnums = {
+    let pressedKeys = [];
+    let releasedKeys = [];
+	let KeyEnums = {
 		LEFT_ARROW: 37,
 		UP_ARROW: 38,
 		RIGHT_ARROW: 39,
@@ -35,12 +35,12 @@ var KeyInput = function() {
     };
 
     this.isReleased = function(_key) {
-        var currentKeyReleased = this.getKey(_key);
+        let currentKeyReleased = this.getKey(_key);
         return [currentKeyReleased] ? true : false;
     };
 
     this.isPressed = function(_key) {
-        var currentKeyPressed = this.getKey(_key);
+        let currentKeyPressed = this.getKey(_key);
 		return pressedKeys[currentKeyPressed] ? true : false;
 	};
 
@@ -59,7 +59,7 @@ var KeyInput = function() {
 	document.addEventListener("keyup", this.keyUp.bind(this));
 };
 
-//Held outside the Function-Class to make it a public static method which then utilizes the closure of the "instance" var; to make it a private static var.
+//Held outside the Function-Class to make it a public static method which then utilizes the closure of the "instance" let; to make it a private static let.
 KeyInput.getInstance = function() {
 	if(!instance) {
 		return new KeyInput();

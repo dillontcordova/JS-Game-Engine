@@ -1,10 +1,10 @@
 /**
  * Created by Dillon_Cordova on 12/4/2016.
  */
-var ActorController = (function () {
-    var actorList;
-    var enemyList;
-    var friendlyList;
+let ActorController = (function () {
+    let actorList;
+    let enemyList;
+    let friendlyList;
 
     return {
         ctx: null,
@@ -36,8 +36,8 @@ var ActorController = (function () {
         },
 
         tick: function() {
-            for (var i = actorList.length - 1; i >= 0; --i) {
-                var curActor = actorList[i];
+            for (let i = actorList.length - 1; i >= 0; --i) {
+                let curActor = actorList[i];
                 curActor.tick(actorList, this.input);
                 curActor.physics();
             }
@@ -45,7 +45,7 @@ var ActorController = (function () {
 
         render: function() {
             this.ctx.clearRect( 0, 0, this.canvasWidth, this.canvasHeight );
-            for (var i = actorList.length - 1; i >= 0; i--) {
+            for (let i = actorList.length - 1; i >= 0; i--) {
                 actorList[i].draw(this.ctx);
             }
         }
