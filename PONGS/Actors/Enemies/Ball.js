@@ -5,6 +5,7 @@ Polymorphism.inherits(Ball, Enemy);
 function Ball(_x, _y, _width, _height, _acceleration) {
 	Enemy.call(this, _x, _y, _width, _height, _acceleration);
     let collisionObj = this.getCollisionObj();
+    let bounceSound = new Audio('SOUND/ballSound.wav');
 
     this.getFillStyle = function() {
 		return "white";
@@ -12,6 +13,8 @@ function Ball(_x, _y, _width, _height, _acceleration) {
 
     this.collidedWithObject = function(_otherActor, _otherCollision) {
         if( collisionObj.isColliding() ){
+            bounceSound.play();
+
             if( collisionObj.isCollidingLeft() || collisionObj.isCollidingRight() ){
                 this.setVelX(-this.getVelX());
             }
