@@ -4,15 +4,16 @@
 function Actor(_x, _y, _width, _height, _speed) {
 	Polymorphism.abstractClass(this, arguments);
 
-	var velY = 0;
-	var velX = _speed;
-	var width = _width;
-	var height = _height;
-	var xy = new Point( _x, _y);
-	var collisionObj = new Collision(xy, width, height);
+	let velY = 0;
+	let velX = _speed;
+	let width = _width;
+	let height = _height;
+	let xy = new Point( _x, _y);
+	let collisionObj = new Collision(xy, width, height);
 	ActorController.addActor(this);
+    RenderController.addView(this);
 
-	//Abstract Methods
+    //Abstract Methods
 	this.subTick = function(/*_actors*/) {
 		Polymorphism.abstractMethod(this);
 	};
@@ -27,18 +28,9 @@ function Actor(_x, _y, _width, _height, _speed) {
 	};
 
 	//Public Methods
-	this.draw = function (_ctx) {
-		_ctx.fillStyle = this.getFillStyle();
-		this.drawActor(_ctx);
-	};
-
 	this.tick = function(_actors) {
 		collisionObj.checkCollision(this, _actors);
 		this.subTick();
-	};
-
-	this.drawActor = function(_ctx) {
-		_ctx.fillRect( this.getX(), this.getY(), this.getWidth(), this.getHeight() );
 	};
 
 	//Privileged Methods

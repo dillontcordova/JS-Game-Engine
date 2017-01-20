@@ -7,20 +7,14 @@ let ActorController = (function () {
     let friendlyList;
 
     return {
-        ctx: null,
         input: null,
-        canvasWidth: null,
-        canvasHeight: null,
 
-        init: function (_ctx, _canvasHeight, _canvasWidth, _input) {
+        init: function (_input) {
             actorList = [];
             enemyList = [];
             friendlyList = [];
 
-            this.ctx =_ctx;
             this.input = _input;
-            this.canvasWidth = _canvasWidth;
-            this.canvasHeight = _canvasHeight;
         },
         addActor: function(_actor) {
             Assert.is( _actor instanceof Actor, "Can only add of class Actor to the addActor method in ActorController!" );
@@ -41,14 +35,6 @@ let ActorController = (function () {
                 curActor.tick(actorList, this.input);
                 curActor.physics();
             }
-        },
-
-        render: function() {
-            this.ctx.clearRect( 0, 0, this.canvasWidth, this.canvasHeight );
-            for (let i = actorList.length - 1; i >= 0; i--) {
-                actorList[i].draw(this.ctx);
-            }
         }
     };
-
 })();

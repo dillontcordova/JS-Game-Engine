@@ -11,7 +11,16 @@
 	let frameRenderDuration = oneSec / RENDER_FPS;
 	let frameCalcDuration = oneSec / CALC_FPS;
 
-	Game.init();
+    Game.init();
+
+    let requestFrameToRenderOn = (function(){
+        return  window.requestAnimationFrame       ||
+            	window.webkitRequestAnimationFrame ||
+            	window.mozRequestAnimationFrame    ||
+            function( callback ){
+                setTimeout(callback, frameRenderDuration);
+            };
+    })();
 
 	global.start = function(){
 		let gameStartScreen = document.getElementById("game-start-screen");
@@ -22,10 +31,9 @@
 			setTimeout(CalcLoop, frameCalcDuration);
 		})();
 		(function RenderLoop() {
-			ActorController.render();
-			setTimeout(RenderLoop, frameRenderDuration);
+			RenderController.render();
+            requestFrameToRenderOn(RenderLoop);
 		})();
 	};
-
 })(this);
 

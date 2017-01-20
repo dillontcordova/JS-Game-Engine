@@ -2,24 +2,23 @@
  * Created by dillon_cordova on 12/3/2016.
  */
 let Game = (function() {
-	//private:
+    //private:
+    let ctx;
 	let room;
-	let width;
-	let canvas;
-	let height;
-	let ctx;
+    let width;
+    let canvas;
+    let height;
 	let keyInput;
 	let gameScore;
 	let player1Num;
 	let player2Num;
-	let sideScoreAnimation = 0;
 
 	return {
 		//privileged:
 		init: function() {
-			canvas = document.getElementById("game");
 			gameScore = document.getElementById("game-score");
-			ctx = canvas.getContext("2d");
+            canvas = document.getElementById("game");
+            ctx = canvas.getContext("2d");
 			height = canvas.height;
 			width = canvas.width;
 			
@@ -29,14 +28,16 @@ let Game = (function() {
 			player2Num = 0;
 
 			//temp
-			(function ActorInit() {
-				ActorController.init(ctx, height, width, keyInput);
+			(function GameInit() {
+				ActorController.init(keyInput);
+                RenderController.init(ctx, height, width);
+
 				new Wall(0, 30, width, 5, 0)					; // top
 				new Wall(0, height-35, width, 5, 0)				; // bottom
 				new LeftPaddle(0, height/2, 15, 45, 1)			;
 				new RightPaddle(width-20, height/2, 15, 45, 1)	;
 				new Ball(width/2, ((height/2) + 10), 10, 10, 1)	;
-				ActorController.render();
+				RenderController.render();
 			})();
 		},
 
@@ -47,29 +48,17 @@ let Game = (function() {
 
 			//temp
 			(function ActorInit() {
-				ActorController.init(ctx, height, width, keyInput);
+				ActorController.init(keyInput);
+                RenderController.init(ctx, height, width);
 
 				new Wall(0, 30, width, 5, 0)					; // top
 				new Wall(0, height-35, width, 5, 0)				; // bottom
 				new LeftPaddle(0, height/2, 15, 45, 1)			;
 				new RightPaddle(width-20, height/2, 15, 45, 1)	;
 				new Ball(width/2, ((height/2) + 10), 10, 10, 1)	;
-
 			})();
 		},
 
-		getCanvasWidth: function() {
-			return width;
-		},
-		getCanvasHeight: function() {
-			return height;
-		},
-		getCanvasCtx: function() {
-			return ctx;
-		},
-		getKeyInput: function () {
-			return keyInput;
-		},
 		getRoom: function() {
 			return room;
 		},
