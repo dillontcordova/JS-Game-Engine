@@ -10,13 +10,15 @@ function SpriteSheet (_fileName, _ctx, _spriteWidth, _spriteHeight) {
     let curAnimationFrame = 0;
     let spriteWidth = _spriteWidth || 16;
     let spriteHeight = _spriteHeight || 16;
-    let imageSheet = new Image();
+    let curSplicedSheets = 0;
+    let totalSheetsToSplice = RenderController.viewList.length;
 
+    let imageSheet = new Image();
     imageSheet.crossOrigin = 'anonymous';
     imageSheet.src = _fileName;
-    imageSheet.onload = determineAnimationFrames;
+    imageSheet.onload = determineAnimationClips;
 
-    function determineAnimationFrames() {
+    function determineAnimationClips() {
         let foundPixel = false;
         let rows = imageSheet.height / spriteHeight;
         let columns = imageSheet.width / spriteWidth;
@@ -37,6 +39,11 @@ function SpriteSheet (_fileName, _ctx, _spriteWidth, _spriteHeight) {
                 animationClips[row][col] = foundPixel;
                 foundPixel = false;
             }
+        }
+
+        debugger;
+        if(++curSplicedSheets === totalSheetsToSplice) {
+            //loading complete
         }
     }
 

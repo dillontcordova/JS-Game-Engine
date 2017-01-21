@@ -1,9 +1,9 @@
 /**
  * Created by dillon_cordova on 12/4/2016.
  */
-var Assert = (function() {
-	var isDevelopModeOn = false;
-	var isDebugModeOn = true;
+let Assert = (function() {
+	let isDevelopModeOn = false;
+	let isDebugModeOn = true;
 
 	return {
 		is: function(_condition, _message) {

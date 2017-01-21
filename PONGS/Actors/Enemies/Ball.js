@@ -4,8 +4,11 @@
 Polymorphism.inherits(Ball, Enemy);
 function Ball(_x, _y, _width, _height, _acceleration) {
 	Enemy.call(this, _x, _y, _width, _height, _acceleration);
-    let collisionObj = this.getCollisionObj();
-    let bounceSound = new Audio('res/SOUND/ballSound.wav');
+
+	let collisionObj = this.getCollisionObj();
+    SpriteSheetController.addSpriteSheet(this, 'res\\SPRITE_SHEETS\\wall.png');
+    AudioController.addAudio('Ball', 'res/SOUND/ballSound.wav');
+    let bounceSound = AudioController.getAudio('Ball');
 
     this.getFillStyle = function() {
 		return "white";

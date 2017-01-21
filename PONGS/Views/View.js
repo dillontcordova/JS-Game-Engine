@@ -2,7 +2,7 @@
  * Created by dillo_000 on 1/13/2017.
  */
 function View(_model) {
-    let TO_RADIANS = Math.PI/180;
+    const TO_RADIANS = Math.PI/180;
     let pattern = null;
     let model = _model;
     let image = null;
@@ -14,7 +14,7 @@ function View(_model) {
 
     (function init(_fileName, _isPattern) {
         image = new Image();
-        image.src = 'res\\SpriteSheets\\wall.png';//_fileName;
+        image.src = 'res\\SPRITE_SHEETS\\wall.png';//_fileName;
 
         // if(_isPattern) {
         //     pattern = this.ctx.createPattern(image, 'repeat');

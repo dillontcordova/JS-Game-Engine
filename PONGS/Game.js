@@ -29,8 +29,14 @@ let Game = (function() {
 
 			//temp
 			(function GameInit() {
+
+                let readSpriteFiles = new ReadSpriteFiles("D:\\Repositories\\Java-Game-Engine\\res\\SpriteSheets\\spriteSheetInfo.txt");
+                SpriteSheetGenerator.spriteSheetCreator(readSpriteFiles.openFile());
+
+
 				ActorController.init(keyInput);
                 RenderController.init(ctx, height, width);
+                SpriteSheetController.init(ctx);
 
 				new Wall(0, 30, width, 5, 0)					; // top
 				new Wall(0, height-35, width, 5, 0)				; // bottom
