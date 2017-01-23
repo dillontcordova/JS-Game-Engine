@@ -30,18 +30,22 @@ let Game = (function() {
 			//temp
 			(function GameInit() {
 
-                SpriteSheetGenerator.spriteSheetCreator('res\\SPRITE_SHEETS\\spriteSheetInfo.txt');
+                let loadImages = new Promise(function (resolve, reject) {
+                    SpriteSheetController.init(ctx);
+                    SpriteSheetGenerator.spriteSheetCreator('res\\SPRITE_SHEETS\\spriteSheetInfo.txt', resolve, reject);
+                });
 
-				ActorController.init(keyInput);
-                RenderController.init(ctx, height, width);
-                SpriteSheetController.init(ctx);
+                loadImages.then(function () {
+                    ActorController.init(keyInput);
+                    RenderController.init(ctx, height, width);
 
-				new Wall(0, 30, width, 5, 0)					; // top
-				new Wall(0, height-35, width, 5, 0)				; // bottom
-				new LeftPaddle(0, height/2, 15, 45, 1)			;
-				new RightPaddle(width-20, height/2, 15, 45, 1)	;
-				new Ball(width/2, ((height/2) + 10), 10, 10, 1)	;
-				RenderController.render();
+                    new Wall(0, 30, width, 5, 0)					; // top
+                    new Wall(0, height-35, width, 5, 0)				; // bottom
+                    new LeftPaddle(0, height/2, 15, 45, 1)			;
+                    new RightPaddle(width-20, height/2, 15, 45, 1)	;
+                    new Ball(width/2, ((height/2) + 10), 10, 10, 1)	;
+                    RenderController.render();
+                });
 			})();
 		},
 

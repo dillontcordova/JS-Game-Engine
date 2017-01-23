@@ -10,13 +10,15 @@ let SpriteSheetController = (function () {
     return {
         init: function(_ctx) {
             ctx = _ctx;
+            SpriteSheet.prototype.ctx = SpriteSheet.prototype.ctx || _ctx;
             spriteSheetList = {};
         },
 
-        addSpriteSheet: function (_fileName, _filePath, _spriteWidth, _spriteHeight) {
+        addSpriteSheet: function (_spriteSheet) {
             Assert.is(ctx, '!init function on SpriteSheetController was never called!');
-            if(!spriteSheetList[_fileName]) {
-                spriteSheetList[_fileName] = new SpriteSheet(_filePath, ctx, _spriteWidth, _spriteHeight);
+            let sheetName = _spriteSheet.getSpriteSheetName();
+            if( !spriteSheetList[sheetName] ){
+                spriteSheetList[sheetName] = _spriteSheet;
             }
         },
 

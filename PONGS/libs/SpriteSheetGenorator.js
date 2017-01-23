@@ -3,13 +3,13 @@
  */
 
 let SpriteSheetGenerator = (function () {
-    const SheetValue = {
-        SheetKey: 'sheetKey',
-        SheetPath: 'sheetPath',
-        SpriteSize: 'spriteSize',
-        SheetWidth: 'sheetWidth',
-        SheetHeight: 'sheetHeight'
-    };
+    const SheetValue = [
+        'spriteSize',
+        'filePath',
+        'width',
+        'height',
+        'spriteSheetName'
+    ];
 
     let readSpriteSheetFile = function (_url) {
         return new Promise(function (resolve, reject) {
@@ -26,30 +26,42 @@ let SpriteSheetGenerator = (function () {
     };
 
     let pretendFutureConstructor = function (_spriteSheetData) {
-        debugger;
         let spriteSheet = new SpriteSheet();
 
-        for(let sheetValue of Object.values(SheetValue)) {
+        for(let sheetValue of SheetValue) {
+            let curSheetPropertyValue = _spriteSheetData[sheetValue];
+
             switch (sheetValue) {
-                case SheetValue.SheetPath:
-                    spriteSheet.setImagePath(_spriteSheetData[sheetValue]);
+                // 'filePath',
+                // 'width',
+                // 'height',
+                case 'filePath':
+                    spriteSheet.setImage(curSheetPropertyValue);
                     break;
-                case SheetValue.SheetHeight:
-                    spriteSheet.setImageHeight(_spriteSheetData[sheetValue]);
+                case 'spriteSize':
+                    spriteSheet.setSpriteWidth(curSheetPropertyValue);
+                    spriteSheet.setSpriteHeight(curSheetPropertyValue);
                     break;
-                case SheetValue.SheetWidth:
-                    spriteSheet.setImageWidth(_spriteSheetData[sheetValue]);
-                    break;
-                case SheetValue.SpriteSize:
-                    spriteSheet.setSpriteSize(_spriteSheetData[sheetValue]);
+                case 'spriteSheetName':
+                    spriteSheet.setSpriteSheetName(curSheetPropertyValue);
                     break;
             }
         }
+
+        return spriteSheet;
     };
 
     return {
-        spriteSheetCreator: function (_url) {
+        curCount: 0,
+        totalCount: 0,
+        resolvefuncPointer: null,
+        rejectfuncPointer: null,
+
+        spriteSheetCreator: function (_url, _promiseResolve, _promiseReject) {
+            this.resolvefuncPointer = _promiseResolve;
+            this.rejectfuncPointer = _promiseReject;
             readSpriteSheetFile(_url).then( function(result) {
+                this.totalCount = result.length;
                 for(let spriteSheet of result) {
                     SpriteSheetController.addSpriteSheet( pretendFutureConstructor(spriteSheet) );
                 }

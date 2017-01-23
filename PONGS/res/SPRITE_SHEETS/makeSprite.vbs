@@ -34,7 +34,6 @@ Sub checkForSourceFolder()
 		If parentFolderPath = "" Then
 			WScript.quit()
 		End If
-		parentFolderPath = "/" & parentFolderPath
 	Else
 		parentFolderPath = ""
 	End If

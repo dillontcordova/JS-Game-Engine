@@ -81,7 +81,6 @@ function Sector(_x, _y, _width, _height) {
 				_actorBox.left <= _quadrantBox.right;
 	};
 	this.setCheckAreas = function (_actorBox, _dfg) {
-		debugger;
 		for(var key in quadrants) {
 			var curQuadrant = quadrants[key];
 			var curQuadrantBox = curQuadrant.box;
