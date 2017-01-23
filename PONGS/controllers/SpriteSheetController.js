@@ -14,7 +14,6 @@ let SpriteSheetController = (function () {
         },
 
         addSpriteSheet: function (_fileName, _filePath, _spriteWidth, _spriteHeight) {
-            debugger;
             Assert.is(ctx, '!init function on SpriteSheetController was never called!');
             if(!spriteSheetList[_fileName]) {
                 spriteSheetList[_fileName] = new SpriteSheet(_filePath, ctx, _spriteWidth, _spriteHeight);

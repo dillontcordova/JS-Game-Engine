@@ -6,11 +6,11 @@ function SpriteSheet (_fileName, _ctx, _spriteWidth, _spriteHeight) {
     Assert.is(_fileName && _ctx, 'Unable to load spriteSheet!');
 
     let animationClips = [];
+    let curSplicedSheets = 0;
     let curAnimationClip = 0;
     let curAnimationFrame = 0;
     let spriteWidth = _spriteWidth || 16;
     let spriteHeight = _spriteHeight || 16;
-    let curSplicedSheets = 0;
     let totalSheetsToSplice = RenderController.viewList.length;
 
     let imageSheet = new Image();

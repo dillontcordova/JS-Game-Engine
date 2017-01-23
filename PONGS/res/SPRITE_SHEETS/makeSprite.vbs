@@ -3,11 +3,13 @@ CONST WIDTH  = 162
 CONST HEIGTH = 164
 Dim startingFolderName
 Dim parentFolderPath
+Dim isFirstObject
 
 Call Main()
 
 Sub Main()
 	
+	isFirstObject = true
 	Set WshShell = CreateObject("WScript.Shell")
 	strCurDir = WshShell.CurrentDirectory
 
@@ -45,11 +47,11 @@ Sub ShowSubFolders(fFolder, objFSO, resultFile)
 	For Each objFile in colFiles
         If UCase(objFSO.GetExtensionName(objFile.name)) = "PNG" Then
         	Dim input
-			input = InputBox("Enter numeric sprite size for the image: (" & objFile.Name & ") spriteSheet") 
-			If input = "" Then
-				WScript.quit()
-			End If
-			Call getImageDimensions(fFolder.Path, objFile.name, input, resultFile)
+		input = InputBox("Enter numeric sprite size for the image: (" & objFile.Name & ") spriteSheet") 
+		If input = "" Then
+			WScript.quit()
+		End If
+		Call getImageDimensions(fFolder.Path, objFile.name, input, resultFile)
         End If
     Next
 	
@@ -61,12 +63,13 @@ End Sub
 
 Function createResultFile(folderPath)
 	Set fileSave = CreateObject("Scripting.FileSystemObject")
-    Set endResultFile = fileSave.CreateTextFile(folderPath & "\spriteSheetInfo.txt", True)	
-	Set createResultFile = endResultFile
+	Set resultFile = fileSave.CreateTextFile(folderPath & "\spriteSheetInfo.txt", True)	
+	resultFile.WriteLine("[")
+	Set createResultFile = resultFile
 End Function
 
 Sub closeResultFile(resultFile)
-	resultFile.WriteLine("!")
+	resultFile.WriteLine("]")
 	resultFile.close
 End Sub
 
@@ -87,12 +90,18 @@ Sub getImageDimensions(oFolderPath, oFilePath, input, resultFile)
 	strNewString = objRegEx.Replace(oFolderPath, "")	
 	curFilePath = Replace(strNewString, "\", "/") & "/" + oFile.Name
 	spriteSheetName = Replace(oFile.Name, ".png", "")
-	
-	
-	resultFile.WriteLine(".")
-	resultFile.WriteLine(spriteSheetName)
-	resultFile.WriteLine(parentFolderPath & curFilePath)	
-	resultFile.WriteLine(input)
-	resultFile.WriteLine(intWidth)
-	resultFile.WriteLine(intHeight)
+
+	If isFirstObject = true then
+	       	resultFile.WriteLine("{")	
+	Else
+	       	resultFile.WriteLine(",{")	
+	End if
+
+	isFirstObject = false
+	resultFile.WriteLine("""spriteSheetName"":""" & spriteSheetName & """,")
+	resultFile.WriteLine("""filePath"":""" & parentFolderPath & curFilePath & """,")	
+	resultFile.WriteLine("""spriteSize"":" & input & ",")
+	resultFile.WriteLine("""width"":" & intWidth & ",")
+	resultFile.WriteLine("""height"":" & intHeight)
+	resultFile.WriteLine("}")
 End Sub

@@ -30,9 +30,7 @@ let Game = (function() {
 			//temp
 			(function GameInit() {
 
-                let readSpriteFiles = new ReadSpriteFiles("D:\\Repositories\\Java-Game-Engine\\res\\SpriteSheets\\spriteSheetInfo.txt");
-                SpriteSheetGenerator.spriteSheetCreator(readSpriteFiles.openFile());
-
+                SpriteSheetGenerator.spriteSheetCreator('res\\SPRITE_SHEETS\\spriteSheetInfo.txt');
 
 				ActorController.init(keyInput);
                 RenderController.init(ctx, height, width);
