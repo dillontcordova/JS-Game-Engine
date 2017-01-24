@@ -43,7 +43,7 @@ let SpriteSheetGenerator = (function () {
                     spriteSheet.setSpriteHeight(curSheetPropertyValue);
                     break;
                 case 'spriteSheetName':
-                    spriteSheet.setSpriteSheetName(curSheetPropertyValue);
+                    spriteSheet.setSpriteSheetName(curSheetPropertyValue.toLowerCase());
                     break;
             }
         }
@@ -54,14 +54,15 @@ let SpriteSheetGenerator = (function () {
     return {
         curCount: 0,
         totalCount: 0,
-        resolvefuncPointer: null,
-        rejectfuncPointer: null,
+        imageLoadingFailed: null,
+        imageLoadingCompleted: null,
 
         spriteSheetCreator: function (_url, _promiseResolve, _promiseReject) {
-            this.resolvefuncPointer = _promiseResolve;
-            this.rejectfuncPointer = _promiseReject;
+            this.imageLoadingFailed = _promiseReject;
+            this.imageLoadingCompleted = _promiseResolve;
+
             readSpriteSheetFile(_url).then( function(result) {
-                this.totalCount = result.length;
+                SpriteSheetGenerator.totalCount = result.length;
                 for(let spriteSheet of result) {
                     SpriteSheetController.addSpriteSheet( pretendFutureConstructor(spriteSheet) );
                 }

@@ -8,10 +8,8 @@
 	const oneSec = 1000;
 	const CALC_FPS = 300;
 	const RENDER_FPS = 60;
-	let frameRenderDuration = oneSec / RENDER_FPS;
 	let frameCalcDuration = oneSec / CALC_FPS;
-
-    Game.init();
+    let frameRenderDuration = oneSec / RENDER_FPS;
 
     let requestFrameToRenderOn = (function(){
         return  window.requestAnimationFrame       ||
@@ -22,7 +20,14 @@
             };
     })();
 
-	global.start = function(){
+    Game.init();
+
+    global.start = function(){
+    	if( !ActorController.isInitialized() ){
+            // SpriteSheetGenerator.imageLoadingFailed();
+            // Assert.is(false, '!Game initialization has failed!')
+		}
+
 		let gameStartScreen = document.getElementById("game-start-screen");
 		gameStartScreen.setAttribute('class', 'hidden');
 

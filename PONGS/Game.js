@@ -35,7 +35,8 @@ let Game = (function() {
                     SpriteSheetGenerator.spriteSheetCreator('res\\SPRITE_SHEETS\\spriteSheetInfo.txt', resolve, reject);
                 });
 
-                loadImages.then(function () {
+                loadImages.then(
+				function () {
                     ActorController.init(keyInput);
                     RenderController.init(ctx, height, width);
 
@@ -45,6 +46,11 @@ let Game = (function() {
                     new RightPaddle(width-20, height/2, 15, 45, 1)	;
                     new Ball(width/2, ((height/2) + 10), 10, 10, 1)	;
                     RenderController.render();
+                })
+				.catch(function (reason) {
+                    Assert.console('Game was not properly initialized');
+                    Assert.console('count of images loaded: (' + SpriteSheetGenerator.curCount + ') Amount of images need to load: (' + SpriteSheetGenerator.totalCount + ')');
+                    Assert.is(false, reason);
                 });
 			})();
 		},

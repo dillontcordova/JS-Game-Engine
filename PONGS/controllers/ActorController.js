@@ -16,6 +16,9 @@ let ActorController = (function () {
 
             this.input = _input;
         },
+        isInitialized: function() {
+            return !!actorList;
+        },
         addActor: function(_actor) {
             Assert.is( _actor instanceof Actor, "Can only add of class Actor to the addActor method in ActorController!" );
             actorList.push(_actor);

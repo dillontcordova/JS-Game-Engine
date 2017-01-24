@@ -25,6 +25,7 @@ let SpriteSheetController = (function () {
         getSpriteSheet: function (_fileName) {
             Assert.is(ctx, '!init function on SpriteSheetController was never called!');
             Assert.is(_fileName, '!Can not Obtain sprite sheet because file name param in blank!');
+            _fileName = _fileName.toLowerCase();
             Assert.is(spriteSheetList[_fileName], '!Can not Obtain sprite sheet because it was not added with this name: (' + _fileName + ')!');
 
             return spriteSheetList[_fileName];

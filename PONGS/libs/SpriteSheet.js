@@ -3,25 +3,13 @@
  */
 
 function SpriteSheet () {
-    // Assert.is(_fileName && _ctx, 'Unable to load spriteSheet!');
-
     let sheetName = '';
     let spriteWidth = 16;
     let spriteHeight = 16;
     let imageSheet = null;
     let animationClips = [];
-    let curSplicedSheets = 0;
-    let curAnimationClip = 0;
-    let curAnimationFrame = 0;
-    let totalSheetsToSplice = RenderController.viewList.length;
-
 
     this.determineAnimationClips = function() {
-        SpriteSheetGenerator.curCount++;
-        debugger;
-        if(SpriteSheetGenerator.curCount === SpriteSheetGenerator.totalCount) {
-            SpriteSheetGenerator.resolvefuncPointer();
-        }
         let foundPixel = false;
         let rows = imageSheet.height / spriteHeight;
         let columns = imageSheet.width / spriteWidth;
@@ -43,9 +31,13 @@ function SpriteSheet () {
                 foundPixel = false;
             }
         }
+
+        if(++SpriteSheetGenerator.curCount === SpriteSheetGenerator.totalCount) {
+            SpriteSheetGenerator.imageLoadingCompleted();
+        }
     };
 
-    this.setImage = function(_fileName, _promiseResolve) {
+    this.setImage = function(_fileName) {
         imageSheet = new Image();
         imageSheet.crossOrigin = 'anonymous';
         imageSheet.src = _fileName;
@@ -64,33 +56,16 @@ function SpriteSheet () {
     this.getSpriteSheetName = function() {
         return sheetName;
     };
-
-
-    this.setAnimationClip = function(_animationClip) {
-        Assert.is(_animationClip-0 === _animationClip-0, 'animation clip param must be of Integer type!');
-        curAnimationClip = _animationClip;
-        curAnimationFrame = 0;
+    this.getSpriteWidth = function() {
+        return spriteWidth;
     };
-
-    this.nextFrame = function() {
-        if(curAnimationFrame < animationClips[curAnimationClip].length) {
-            curAnimationFrame++;
-        } else {
-            curAnimationFrame = 0;
-        }
+    this.getSpriteHeight = function() {
+        return spriteHeight;
     };
-
-    this.getAnimationFrame = function() {
-        let imageDrawingCoordinates = {
-            x: (curAnimationFrame * spriteWidth),
-            y: (curAnimationClip * spriteHeight),
-            w: spriteWidth,
-            h: spriteHeight
-        };
-
-        this.nextFrame();
-
-        return imageDrawingCoordinates;
-    }
-
+    this.getImageSheet = function() {
+        return imageSheet;
+    };
+    this.getAnimationClips = function() {
+        return animationClips;
+    };
 }
