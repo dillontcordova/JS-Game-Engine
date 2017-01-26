@@ -24,8 +24,8 @@
 
     global.start = function(){
     	if( !ActorController.isInitialized() ){
-            // SpriteSheetGenerator.imageLoadingFailed();
-            // Assert.is(false, '!Game initialization has failed!')
+            SpriteSheetGenerator.imageLoadingFailed();
+            Assert.is(false, '!Game initialization has failed!')
 		}
 
 		let gameStartScreen = document.getElementById("game-start-screen");
