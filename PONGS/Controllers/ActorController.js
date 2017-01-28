@@ -19,17 +19,17 @@ let ActorController = (function () {
         isInitialized: function() {
             return !!actorList;
         },
-        addActor: function(_actor) {
-            Assert.is( _actor instanceof Actor, "Can only add of class Actor to the addActor method in ActorController!" );
-            actorList.push(_actor);
+        addActor: function(_actorInstance) {
+            Assert.is( _actorInstance instanceof Actor, "Can only add of class Actor to the addActor method in ActorController!" );
+            actorList.push(_actorInstance);
         },
-        addEnemy: function(_actor) {
-            Assert.is( _actor instanceof Enemy, "Can only add of class Enemy to the addEnemy method in ActorController!" );
-            enemyList.push(_actor);
+        addEnemy: function(_actorInstance) {
+            Assert.is( _actorInstance instanceof Enemy, "Can only add of class Enemy to the addEnemy method in ActorController!" );
+            enemyList.push(_actorInstance);
         },
-        addFriendly: function(_actor) {
-            Assert.is( _actor instanceof Actor, "Can only add actors to this controller!" );
-            friendlyList.push(_actor);
+        addFriendly: function(_actorInstance) {
+            Assert.is( _actorInstance instanceof Actor, "Can only add actors to this controller!" );
+            friendlyList.push(_actorInstance);
         },
 
         tick: function() {

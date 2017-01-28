@@ -22,10 +22,10 @@ function BoundBox(_x, _y, _width, _height) {
 			left: _x,
 			right: (_x + _width),
 			bottom: (_y + _height),
-			topleft: new Point( [_x, _y] ),
-			topright: new Point( [(_x + _width), _y] ),
-			bottomleft: new Point( [_x, (_y + _height)] ),
-			bottomright: new Point( [(_x + _width), (_y + _height)] )
+			topleft: new Vector( [_x, _y] ),
+			topright: new Vector( [(_x + _width), _y] ),
+			bottomleft: new Vector( [_x, (_y + _height)] ),
+			bottomright: new Vector( [(_x + _width), (_y + _height)] )
 		};
 	};
 	bounds = this.resetAllBounds(_x, _y, _width, _height);

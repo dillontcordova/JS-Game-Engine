@@ -55,13 +55,6 @@ let KeyInput = function() {
 	this.getKeyEnums = function () {
 		return KeyEnums;
 	};
-	//Not sure what this is for (maybe its an overide to the documents prebuilt "keypress" default function)
-	// this.addKeyPressListener = function(_keyCode, _callback) {
-	// 	document.addEventListener("keypress", function(e) {
-	// 		if (e.keyCode == keyCode)
-	// 			callback(e);
-	// 	});
-	// };
 
 	document.addEventListener("keydown", this.keyDown.bind(this));
 	document.addEventListener("keyup", this.keyUp.bind(this));

@@ -20,12 +20,12 @@
             };
     })();
 
-    Game.init();
+    GameManager.init();
 
     global.start = function(){
     	if( !ActorController.isInitialized() ){
             SpriteSheetGenerator.imageLoadingFailed();
-            Assert.is(false, '!Game initialization has failed!')
+            Assert.is(false, '!GameManager initialization has failed!')
 		}
 
 		let gameStartScreen = document.getElementById("game-start-screen");
@@ -40,5 +40,6 @@
             requestFrameToRenderOn(RenderLoop);
 		})();
 	};
+
 })(this);
 

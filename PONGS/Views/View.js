@@ -16,7 +16,6 @@ function View(_model) {
     let spriteHeight = null;
     let spriteWidth = null;
     let imageSheet = null;
-    let image = null;
 
     spriteSheet = SpriteSheetController.getSpriteSheet(model.constructor.name);
     animationClips = spriteSheet.getAnimationClips();
@@ -32,9 +31,9 @@ function View(_model) {
 
     this.draw = function (_x, _y, _width, _height) {
         if(!_width || !_height) {
-            if(image) {
-                _width = image.width;
-                _height = image.height;
+            if(imageSheet) {
+                _width = imageSheet.width;
+                _height = imageSheet.height;
             }
         }
 
@@ -56,7 +55,7 @@ function View(_model) {
 
         this.ctx.translate(_x, _y); //move rotating origin point of context to x and y
         this.ctx.rotate(_angle * TO_RADIANS);
-        this.ctx.drawImage( image, -(image.width/2), -(image.height/2) ); //draw from that origin point so that when it spins it spins from the center
+        this.ctx.drawImage( imageSheet, -(imageSheet.width/2), -(imageSheet.height/2) ); //draw from that origin point so that when it spins it spins from the center
 
         this.ctx.restore();
     };

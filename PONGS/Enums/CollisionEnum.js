@@ -1,16 +1,16 @@
 /**
  * Created by dillon_cordova on 12/14/2016.
  */
-var CollisionEnum = (function() {
-	var top = 1 << 0;
-	var left = 1 << 1;
-	var right = 1 << 2;
-	var bottom = 1 << 3;
-	var topLeft = top | left;
-	var topRight = top | right;
-	var bottomLeft = bottom | left;
-	var bottomRight = bottom | right;
-	var allSides = bottom | right | left | top;
+let CollisionEnum = (function() {
+	let top = 1 << 0;
+	let left = 1 << 1;
+	let right = 1 << 2;
+	let bottom = 1 << 3;
+	let topLeft = top | left;
+	let topRight = top | right;
+	let bottomLeft = bottom | left;
+	let bottomRight = bottom | right;
+	let allSides = bottom | right | left | top;
 
 	return {
 		TOP:			top,

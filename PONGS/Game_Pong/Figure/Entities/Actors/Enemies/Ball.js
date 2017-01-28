@@ -3,16 +3,12 @@
  */
 Polymorphism.inherits(Ball, Enemy);
 function Ball(_x, _y, _width, _height, _acceleration) {
-	Enemy.call(this, _x, _y, _width, _height, _acceleration);
+    Enemy.apply(this, arguments);
 
     AudioController.addAudio('Ball', 'res/SOUND/ballSound.wav');
 
     let collisionObj = this.getCollisionObj();
     let bounceSound = AudioController.getAudio('Ball');
-
-    this.getFillStyle = function() {
-		return "white";
-   	};
 
     this.collidedWithObject = function(_otherActor, _otherCollision) {
         if( collisionObj.isColliding() ){
@@ -32,15 +28,17 @@ function Ball(_x, _y, _width, _height, _acceleration) {
         }
     };
 
-    this.subTick = function(_actors) {
-        //Ball.super.tick().call(this); // add later
-        let roomBoundBox = Game.getRoom().getBoundBox();
+    let parent_Tick = this.tick;
+    this.tick = function (_actors) {
+        parent_Tick.apply(this, arguments);
+
+        let roomBoundBox = GameManager.getRoom().getBoundBox();
         if( !collisionObj.isWithinBounds(roomBoundBox) ){
-            Game.resetLevel();
+            GameManager.resetLevel();
             if( collisionObj.escape(roomBoundBox) == CollisionEnum.RIGHT ){
-                Game.incrementPlayer0GameScore();
+                GameManager.incrementPlayer0GameScore();
             } else {
-                Game.incrementPlayer1GameScore();
+                GameManager.incrementPlayer1GameScore();
             }
         }
     };

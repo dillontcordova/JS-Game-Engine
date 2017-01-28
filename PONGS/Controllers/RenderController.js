@@ -21,10 +21,9 @@ let RenderController = (function () {
             View.prototype.canvasHeight = View.prototype.canvasHeight || _canvasHeight;
         },
 
-        addView: function (_actor) {
-            Assert.is( _actor instanceof Actor, "Can only add of class Actor to the addView method in RenderController!" );
-            // eval('new ' + _actor.constructor.name + 'View(' + _actor + ')');
-            this.viewList.push( new View(_actor) );
+        addView: function (_actorInstance) {
+            Assert.is( _actorInstance instanceof Actor, "Can only add of class Actor to the addView method in RenderController!" );
+            this.viewList.push( new View(_actorInstance) );
         },
 
         render: function() {

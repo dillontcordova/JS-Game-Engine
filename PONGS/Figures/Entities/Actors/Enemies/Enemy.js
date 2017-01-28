@@ -3,6 +3,6 @@
  */
 Polymorphism.inherits(Enemy, Actor);
 function Enemy(_x, _y, _width, _height, _acceleration) {
-    Actor.call(this, _x, _y, _width, _height, _acceleration);
+    Actor.apply(this, arguments);
     ActorController.addEnemy(this);
 }

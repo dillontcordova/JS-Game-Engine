@@ -2,7 +2,7 @@
  * Created by dillon_cordova on 12/4/2016.
  */
 let Assert = (function() {
-	let isDevelopModeOn = false;
+	let isDevelopModeOn = true;
 	let isDebugModeOn = true;
 
 	return {

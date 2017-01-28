@@ -1,7 +1,7 @@
 /**
  * Created by dillon_cordova on 12/3/2016.
  */
-let Game = (function() {
+let GameManager = (function() {
     //private:
     let ctx;
 	let room;
@@ -48,7 +48,7 @@ let Game = (function() {
                     RenderController.render();
                 })
 				.catch(function (reason) {
-                    Assert.console('Game was not properly initialized');
+                    Assert.console('GameManager was not properly initialized');
                     Assert.console('count of images loaded: (' + SpriteSheetGenerator.curCount + ') Amount of images need to load: (' + SpriteSheetGenerator.totalCount + ')');
                     Assert.is(false, reason);
                 });

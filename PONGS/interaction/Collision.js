@@ -2,14 +2,14 @@
  * Created by dillon_cordova on 12/14/2016.
  */
 function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
-	var boundBox;
-	var isColliding;
-	var width = _width;
-	var height = _height;
-	var xyPoint = _xyPoint;
-	var curHitDirection = 0;
-	var isContainedWithin = false;
-	var usingPixelPerfect = _usingPixelPerfect || false;
+	let boundBox;
+	let isColliding;
+	let width = _width;
+	let height = _height;
+	let xyPoint = _xyPoint;
+	let curHitDirection = 0;
+	let isContainedWithin = false;
+	let usingPixelPerfect = _usingPixelPerfect || false;
 
 	this.getBoundBox = function() {
 		return {
@@ -29,11 +29,11 @@ function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
     };
 
 	this.checkCollision = function(_mainActor, _actorList) {
-		var mainActorCollision = _mainActor.getCollisionObj();
-		for(var i = 0, len = _actorList.length; i < len; ++i) {
-			var otherActor = _actorList[i];
+		let mainActorCollision = _mainActor.getCollisionObj();
+		for(let i = 0, len = _actorList.length; i < len; ++i) {
+			let otherActor = _actorList[i];
 			if(_mainActor != otherActor) {
-				var otherActorCollision = otherActor.getCollisionObj();
+				let otherActorCollision = otherActor.getCollisionObj();
 				if(mainActorCollision.isCollidingWith(otherActorCollision)) {
 					_mainActor.collidedWithObject(otherActor, otherActorCollision);
 					otherActor.collidedWithObject(_mainActor, mainActorCollision);
@@ -41,7 +41,8 @@ function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
 				}
 			}
 		}
-	};
+        return false;
+    };
 
 	this.isWithinBounds = function(_otherBoundBox) {
 		return (boundBox.top < _otherBoundBox.bottom &&
@@ -62,7 +63,7 @@ function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
 
 		this.resetCollision();
 		boundBox = this.getBoundBox();
-		var otherBoundBox = _otherCollision.getBoundBox();
+		let otherBoundBox = _otherCollision.getBoundBox();
 
 		if( this.isWithinBounds(otherBoundBox) ){
 			isColliding = true;
