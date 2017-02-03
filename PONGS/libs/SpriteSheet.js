@@ -8,18 +8,19 @@ function SpriteSheet () {
     let spriteHeight = 16;
     let imageSheet = null;
     let animationClips = [];
+    let ctx = Canvas.context;
 
     this.determineAnimationClips = function() {
         let foundPixel = false;
         let rows = imageSheet.height / spriteHeight;
         let columns = imageSheet.width / spriteWidth;
 
-        this.ctx.drawImage(imageSheet, 0, 0);
+        ctx.drawImage(imageSheet, 0, 0);
 
         for(let row = 0; row < rows; row++) {
             animationClips.push([]);
             for(let col = 0; col < columns; col++) {
-                let spriteImgData = this.ctx.getImageData( (col * spriteWidth), (row * spriteHeight), spriteWidth, spriteHeight ).data;
+                let spriteImgData = ctx.getImageData( (col * spriteWidth), (row * spriteHeight), spriteWidth, spriteHeight ).data;
                 for(let k = 0; k < spriteImgData.length; k += 4) {
                     let curPixel = spriteImgData[k+3];
                     if( curPixel > 0 ){

@@ -13,6 +13,7 @@ function View(_model) {
     let curAnimationClip = 0;
     let curAnimationFrame = 0;
     let animationClips = null;
+    let ctx = Canvas.context;
     let spriteHeight = null;
     let spriteWidth = null;
     let imageSheet = null;
@@ -51,13 +52,13 @@ function View(_model) {
     };
 
     this.rotate = function (_x, _y, _angle) {
-        this.ctx.save(); //save context state
+        ctx.save(); //save context state
 
-        this.ctx.translate(_x, _y); //move rotating origin point of context to x and y
-        this.ctx.rotate(_angle * TO_RADIANS);
-        this.ctx.drawImage( imageSheet, -(imageSheet.width/2), -(imageSheet.height/2) ); //draw from that origin point so that when it spins it spins from the center
+        ctx.translate(_x, _y); //move rotating origin point of context to x and y
+        ctx.rotate(_angle * TO_RADIANS);
+        ctx.drawImage( imageSheet, -(imageSheet.width/2), -(imageSheet.height/2) ); //draw from that origin point so that when it spins it spins from the center
 
-        this.ctx.restore();
+        ctx.restore();
     };
 
     this.spin = function (_degreesToSpin) {
@@ -80,7 +81,7 @@ function View(_model) {
     };
 
     this.drawCurrentFrame = function(_x, _y, _width, _height) {
-        this.ctx.drawImage  (imageSheet,
+        ctx.drawImage  (imageSheet,
                             (curAnimationFrame * spriteWidth), (curAnimationClip * spriteHeight), spriteWidth, spriteHeight,
                             _x, _y, _width, _height);
         this.nextFrame();

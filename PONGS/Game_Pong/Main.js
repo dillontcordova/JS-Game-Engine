@@ -23,7 +23,7 @@
     GameManager.init();
 
     global.start = function(){
-    	if( !ActorController.isInitialized() ){
+    	if( !EntityController.isInitialized() ){
             SpriteSheetGenerator.imageLoadingFailed();
             Assert.is(false, '!GameManager initialization has failed!')
 		}
@@ -32,7 +32,7 @@
 		gameStartScreen.setAttribute('class', 'hidden');
 
 		(function CalcLoop() {
-			ActorController.tick();
+			EntityController.tick();
 			setTimeout(CalcLoop, frameCalcDuration);
 		})();
 		(function RenderLoop() {

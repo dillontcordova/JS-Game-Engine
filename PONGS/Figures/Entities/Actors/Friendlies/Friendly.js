@@ -4,5 +4,5 @@
 Polymorphism.inherits(Friendly, Actor);
 function Friendly(_x, _y, _width, _height, _acceleration) {
     Actor.call(this, _x, _y, _width, _height, _acceleration);
-    ActorController.addFriendly(this);
+    EntityController.addFriendly(this);
 }

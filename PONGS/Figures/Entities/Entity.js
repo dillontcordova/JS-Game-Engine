@@ -8,6 +8,12 @@ function Entity(_x, _y, _width, _height, _acceleration) {
     let width = _width;
     let height = _height;
     let collisionObj = new Collision(this.getVector(), width, height);
+    EntityController.addEntity(this);
+
+    //Public Methods:
+    this.tick = function(_actors) {
+        collisionObj.checkCollision(this, _actors);
+    };
 
     //Privileged Methods:
     this.getWidth = function () {

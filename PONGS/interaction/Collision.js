@@ -28,15 +28,15 @@ function Collision(_xyPoint, _width, _height, _usingPixelPerfect) {
         isContainedWithin = false;
     };
 
-	this.checkCollision = function(_mainActor, _actorList) {
-		let mainActorCollision = _mainActor.getCollisionObj();
-		for(let i = 0, len = _actorList.length; i < len; ++i) {
-			let otherActor = _actorList[i];
-			if(_mainActor != otherActor) {
-				let otherActorCollision = otherActor.getCollisionObj();
-				if(mainActorCollision.isCollidingWith(otherActorCollision)) {
-					_mainActor.collidedWithObject(otherActor, otherActorCollision);
-					otherActor.collidedWithObject(_mainActor, mainActorCollision);
+	this.checkCollision = function(_mainEntity, _entityList) {
+		let mainEntityCollision = _mainEntity.getCollisionObj();
+		for(let i = 0, len = _entityList.length; i < len; ++i) {
+			let otherEntity = _entityList[i];
+			if(_mainEntity != otherEntity) {
+				let otherEntityCollision = otherEntity.getCollisionObj();
+				if(mainEntityCollision.isCollidingWith(otherEntityCollision)) {
+					_mainEntity.collidedWithObject(otherEntity, otherEntityCollision);
+					otherEntity.collidedWithObject(_mainEntity, mainEntityCollision);
 					return true;
 				}
 			}

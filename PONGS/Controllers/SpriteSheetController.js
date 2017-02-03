@@ -3,14 +3,12 @@
  */
 
 let SpriteSheetController = (function () {
-
     let ctx = null;
     let spriteSheetList = null;
 
     return {
-        init: function(_ctx) {
-            ctx = _ctx;
-            SpriteSheet.prototype.ctx = SpriteSheet.prototype.ctx || _ctx;
+        init: function() {
+            ctx = Canvas.context;
             spriteSheetList = {};
         },
 

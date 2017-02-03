@@ -3,7 +3,7 @@
  */
 Polymorphism.inherits(Ball, Enemy);
 function Ball(_x, _y, _width, _height, _acceleration) {
-    Enemy.apply(this, arguments);
+    Ball.super(this, arguments);
 
     AudioController.addAudio('Ball', 'res/SOUND/ballSound.wav');
 

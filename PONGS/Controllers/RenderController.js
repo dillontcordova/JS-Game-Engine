@@ -9,16 +9,11 @@ let RenderController = (function () {
         canvasWidth: null,
         canvasHeight: null,
 
-        init: function (_ctx, _canvasHeight, _canvasWidth) {
+        init: function () {
             this.viewList = [];
-
-            this.ctx =_ctx;
-            this.canvasWidth = _canvasWidth;
-            this.canvasHeight = _canvasHeight;
-
-            View.prototype.ctx = View.prototype.ctx || _ctx;
-            View.prototype.canvasWidth = View.prototype.canvasWidth || _canvasWidth;
-            View.prototype.canvasHeight = View.prototype.canvasHeight || _canvasHeight;
+            this.ctx = Canvas.context;
+            this.canvasWidth = Canvas.width;
+            this.canvasHeight = Canvas.height;
         },
 
         addView: function (_actorInstance) {

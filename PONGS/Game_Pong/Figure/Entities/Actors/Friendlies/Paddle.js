@@ -4,12 +4,12 @@
 Polymorphism.inherits(Paddle, Friendly);
 function Paddle(_x, _y, _width, _height, _speed) {
     Polymorphism.abstractClass(this, arguments);
-	Friendly.apply(this, arguments);
+    Paddle.super(this, arguments);
 
     let curScore = 0;
     let speed = _speed;
     let collisionObj = this.getCollisionObj();
-    let keyEnums = ActorController.input.getKeyEnums();
+    let keyEnums = EntityController.input.getKeyEnums();
 
     this.movedUp = function movedUp(/*_input, _keyEnums*/) {
         Polymorphism.abstractMethod(this);
@@ -18,8 +18,6 @@ function Paddle(_x, _y, _width, _height, _speed) {
         Polymorphism.abstractMethod(this);
     };
 
-    this.subTick = function() {
-	};
 	this.physics = function() {
     };
     this.collidedWithObject = function(_otherCollision) {

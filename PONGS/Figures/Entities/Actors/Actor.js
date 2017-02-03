@@ -8,8 +8,6 @@ function Actor(_x, _y, _width, _height, _speed) {
 
     let velY = 0;
 	let velX = _speed;
-	let collisionObj = this.getCollisionObj();
-	ActorController.addActor(this);
 
     //Abstract Methods:
 	this.collidedWithObject = function(/*_otherCollision*/) {
@@ -17,11 +15,6 @@ function Actor(_x, _y, _width, _height, _speed) {
 	};
 	this.physics = function (/*_actor*/) {
 		Polymorphism.abstractMethod(this);
-	};
-
-	//Public Methods:
-	this.tick = function(_actors) {
-		collisionObj.checkCollision(this, _actors);
 	};
 
 	//Privileged Methods:
