@@ -28,9 +28,9 @@ function Ball(_x, _y, _width, _height, _acceleration) {
         }
     };
 
-    let parent_Tick = this.tick;
+    let super_tick = this.tick;
     this.tick = function (_actors) {
-        parent_Tick.apply(this, arguments);
+        super_tick.apply(this, arguments);
 
         let roomBoundBox = GameManager.getRoom().getBoundBox();
         if( !collisionObj.isWithinBounds(roomBoundBox) ){

@@ -4,20 +4,14 @@
 Polymorphism.inherits(Actor, Entity);
 function Actor(_x, _y, _width, _height, _speed) {
 	Polymorphism.abstractClass(this, arguments);
-    Entity.apply(this, arguments);
-
-    let xy = new Vector( _x, _y);
-    RenderController.addView(this);
+    Actor.super(this, arguments);
 
     let velY = 0;
 	let velX = _speed;
-	let width = _width;
-	let height = _height;
-	let collisionObj = new Collision(xy, width, height);
-
+	let collisionObj = this.getCollisionObj();
 	ActorController.addActor(this);
 
-    //Abstract Methods
+    //Abstract Methods:
 	this.collidedWithObject = function(/*_otherCollision*/) {
 		Polymorphism.abstractMethod(this);
 	};
@@ -25,39 +19,17 @@ function Actor(_x, _y, _width, _height, _speed) {
 		Polymorphism.abstractMethod(this);
 	};
 
-	//Public Methods
+	//Public Methods:
 	this.tick = function(_actors) {
 		collisionObj.checkCollision(this, _actors);
 	};
 
-	//Privileged Methods
-	this.getX = function () {
-		return xy.getX();
-	};
-	this.getY = function () {
-		return xy.getY();
-	};
+	//Privileged Methods:
 	this.getVelX = function () {
 		return velX;
 	};
 	this.getVelY = function () {
 		return velY;
-	};
-	this.getWidth = function () {
-		return width;
-	};
-	this.getHeight = function () {
-		return height;
-	};
-	this.getCollisionObj = function () {
-		return collisionObj;
-	};
-
-	this.setX = function (__x) {
-		xy.setX(__x);
-	};
-	this.setY = function (__y) {
-		xy.setY(__y);
 	};
 	this.setVelX = function (_velX) {
 		velX = _velX;

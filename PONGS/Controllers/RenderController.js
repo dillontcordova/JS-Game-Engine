@@ -22,7 +22,7 @@ let RenderController = (function () {
         },
 
         addView: function (_actorInstance) {
-            Assert.is( _actorInstance instanceof Actor, "Can only add of class Actor to the addView method in RenderController!" );
+            Assert.is( _actorInstance instanceof Figure, "!Can only add of class Figure to the addView method in RenderController!" );
             this.viewList.push( new View(_actorInstance) );
         },
 

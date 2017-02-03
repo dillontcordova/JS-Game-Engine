@@ -3,15 +3,20 @@
  */
 Polymorphism.inherits(Entity, Figure);
 function Entity(_x, _y, _width, _height, _acceleration) {
-    Figure.apply(this, arguments);
+    Entity.super(this, arguments);
 
-    // RenderController.addView(this);
-    // //protected:
-    // this.xy = new Vector( _x, _y);
-    //
-    // Object.defineProperty(this.xy, "x", {
-    //     value: (xy) || "Meow",
-    //     writable: false
-    // });
+    let width = _width;
+    let height = _height;
+    let collisionObj = new Collision(this.getVector(), width, height);
 
+    //Privileged Methods:
+    this.getWidth = function () {
+        return width;
+    };
+    this.getHeight = function () {
+        return height;
+    };
+    this.getCollisionObj = function () {
+        return collisionObj;
+    };
 }
